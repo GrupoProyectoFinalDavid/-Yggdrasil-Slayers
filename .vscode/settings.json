@@ -67,6 +67,6 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "Proyecto_DGPP_Copia.slnx",
+    "dotnet.defaultSolution": "-Yggdrasil-Slayers.slnx",
     "dotnet.enableWorkspaceBasedDevelopment": false
 }

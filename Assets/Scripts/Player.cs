@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
-    private PowerUpManager powerUpManager = new PowerUpManager();
+    private PowerUpManager powerUpManager;
+
 
     [Header("Movimiento")]
     public float speed = 5f;
@@ -24,6 +25,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         currentHealth = maxHealth;
+        powerUpManager = GetComponent<PowerUpManager>();
     }
 
     void Update()
@@ -71,19 +73,8 @@ public class Player : MonoBehaviour
     }
 
     // Método para añadir power-ups
-    public void AddPowerUp(PowerUpType type)
+    public void AddPowerUp(PowerUpData data)
     {
-        if (!powerUps.Contains(type))
-        {
-            powerUps.Add(type);
-
-            // Intentar combinaciones en bucle
-            bool combined;
-            do
-            {
-                combined = powerUpManager.TryCombine(powerUps);
-            }
-            while (combined);
-        }
+        powerUpManager.AddPowerUp(data);
     }
 }

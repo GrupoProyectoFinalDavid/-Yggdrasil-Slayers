@@ -1,0 +1,216 @@
+fileFormatVersion: 2
+guid: b4879894d309d4d42b824bf5aaf4cf9e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7602052494963803415
+    second: fbExplotion_03_0
+  - first:
+      213: -4225060419611583611
+    second: fbExplotion_03_1
+  - first:
+      213: 6888260558459547485
+    second: fbExplotion_03_2
+  - first:
+      213: -530884807116698006
+    second: fbExplotion_03_3
+  - first:
+      213: 7039339212125005411
+    second: fbExplotion_03_4
+  - first:
+      213: -8030423637981667754
+    second: fbExplotion_03_5
+  - first:
+      213: -8016088320260210442
+    second: fbExplotion_03_6
+  - first:
+      213: -7222374561588813336
+    second: fbExplotion_03_7
+  - first:
+      213: -5490485704382621467
+    second: fbExplotion_03_8
+  - first:
+      213: 7858187375416765089
+    second: fbExplotion_03_9
+  - first:
+      213: -2741889915876497852
+    second: fbExplotion_03_10
+  - first:
+      213: 4061581805407732549
+    second: fbExplotion_03_11
+  - first:
+      213: 5170936952959353345
+    second: fbExplotion_03_12
+  - first:
+      213: -8088144716355230541
+    second: fbExplotion_03_13
+  - first:
+      213: 8443999917457223642
+    second: fbExplotion_03_14
+  - first:
+      213: -8741608418517225471
+    second: fbExplotion_03_15
+  - first:
+      213: -91960966362986584
+    second: fbExplotion_03_16
+  - first:
+      213: -4607818367926588669
+    second: fbExplotion_03_17
+  - first:
+      213: 7235366310002785112
+    second: fbExplotion_03_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: fbExplotion_03_3
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 127
+        width: 415
+        height: 241
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6e4827a41be1a8f0800000000000000
+      internalID: -530884807116698006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 63d327f17b91fc14aaa5512a3be981e0
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      fbExplotion_03_0: -7602052494963803415
+      fbExplotion_03_1: -4225060419611583611
+      fbExplotion_03_10: -2741889915876497852
+      fbExplotion_03_11: 4061581805407732549
+      fbExplotion_03_12: 5170936952959353345
+      fbExplotion_03_13: -8088144716355230541
+      fbExplotion_03_14: 8443999917457223642
+      fbExplotion_03_15: -8741608418517225471
+      fbExplotion_03_16: -91960966362986584
+      fbExplotion_03_17: -4607818367926588669
+      fbExplotion_03_18: 7235366310002785112
+      fbExplotion_03_19: 505422204
+      fbExplotion_03_2: 6888260558459547485
+      fbExplotion_03_3: -530884807116698006
+      fbExplotion_03_4: 7039339212125005411
+      fbExplotion_03_5: -8030423637981667754
+      fbExplotion_03_6: -8016088320260210442
+      fbExplotion_03_7: -7222374561588813336
+      fbExplotion_03_8: -5490485704382621467
+      fbExplotion_03_9: 7858187375416765089
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
