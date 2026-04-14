@@ -5,25 +5,21 @@ public class AreaAroundPlayerAbility : AbilityBehaviour
 {
     public float radius;
     public float tickRate;
-
-    private float timer;
+    public float duration;
+    public GameObject areaPrefab;
+    private GameObject currentArea;
 
     public override void Execute(GameObject owner, RuntimePowerUp powerUp)
     {
-        timer -= Time.deltaTime;
+        if (currentArea != null) return;
 
-        if (timer > 0) return;
+        GameObject area = Instantiate(areaPrefab, owner.transform.position, Quaternion.identity);
+        currentArea = area;
 
-        timer = tickRate;
+        AreaInstance instance = area.GetComponent<AreaInstance>();
+        instance.Init(duration, tickRate, powerUp.GetDamage(), owner, radius);
 
-        Collider2D[] hits = Physics2D.OverlapCircleAll(owner.transform.position, radius);
-
-        foreach (var hit in hits)
-        {
-            if (hit.CompareTag("Enemy"))
-            {
-                hit.GetComponent<Enemy>().TakeDamage((int)powerUp.GetDamage());
-            }
-        }
+        // Cuando se destruya, liberar referencia
+        instance.OnDestroyed += () => currentArea = null;
     }
 }

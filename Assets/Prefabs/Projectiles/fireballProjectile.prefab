@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 870954557845313502}
   - component: {fileID: 8473046920872745288}
   - component: {fileID: 8501233193224717706}
-  - component: {fileID: 9061420090186382201}
+  - component: {fileID: 7222361912030236888}
   m_Layer: 0
   m_Name: fireballProjectile
   m_TagString: Untagged
@@ -187,7 +187,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &9061420090186382201
+--- !u!114 &7222361912030236888
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7167631146440875769}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21154b87a78a615409497d8f357e199f, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ca3b27afb39d6242b3c3575fc698ef8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   impactEffectPrefab: {fileID: 8429486897864502984, guid: 2198f3b3809ef554ab0b971b0fe28066,

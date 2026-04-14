@@ -8,6 +8,8 @@ public class PowerUpData : ScriptableObject
 
     public float[] damagePerLevel;
     public float[] cooldownPerLevel;
+    public float[] durationPerLevel;
+    public float[] radiusPerLevel;
     public int maxLevel = 5;
 
     public AbilityBehaviour[] abilities;

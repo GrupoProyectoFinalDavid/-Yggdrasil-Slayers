@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 2
   tickRate: 0.5
+  duration: 1.5
+  areaPrefab: {fileID: 9142796286612414780, guid: 45fad89134fccfb4bb8e3f9ea85895c3,
+    type: 3}
