@@ -13,6 +13,9 @@ public class CameraFollow : MonoBehaviour
     [Header("Suavizado")]
     public float smoothTime = 0.2f;
 
+    [Header("Limites del mapa")]
+    public Vector2 minBounds;
+    public Vector2 maxBounds;
     
 
     private Vector3 velocity = Vector3.zero;
@@ -66,12 +69,39 @@ public class CameraFollow : MonoBehaviour
 
         targetPos.z = currentPos.z;
 
-        transform.position = Vector3.SmoothDamp(currentPos, targetPos, ref velocity, smoothTime);
-    }
+        Vector3 smoothPos = Vector3.SmoothDamp(currentPos, targetPos, ref velocity, smoothTime);
+
+        // Tamaño de la cámara
+        float camHalfHeight = Camera.main.orthographicSize;
+        float camHalfWidth = camHalfHeight * Camera.main.aspect;
+
+        // Clamp
+        float clampedX = Mathf.Clamp(
+            smoothPos.x,
+            minBounds.x + camHalfWidth,
+            maxBounds.x - camHalfWidth
+        );
+
+        float clampedY = Mathf.Clamp(
+            smoothPos.y,
+            minBounds.y + camHalfHeight,
+            maxBounds.y - camHalfHeight
+        );
+
+        transform.position = new Vector3(clampedX, clampedY, smoothPos.z);
+            }
 
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position, new Vector3(deadZoneWidth * 2, deadZoneHeight * 2, 0));
+
+        // Gizmos del area delimitada
+        Gizmos.color = Color.green;
+
+        Vector3 center = (minBounds + maxBounds) / 2;
+        Vector3 size = maxBounds - minBounds;
+
+        Gizmos.DrawWireCube(center, size);
     }
 }

@@ -15,15 +15,17 @@ MonoBehaviour:
   powerUpName: Fire Staff
   isPassive: 0
   damagePerLevel:
-  - 5
   - 10
   - 15
   - 20
+  - 25
   cooldownPerLevel:
   - 2
   - 1.5
   - 1
   - 0.75
+  durationPerLevel: []
+  radiusPerLevel: []
   maxLevel: 4
   abilities:
   - {fileID: 11400000, guid: 9116b075fb3dba34d81e9043fbe92886, type: 2}
