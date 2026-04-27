@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 7167631146440875769, guid: 13cd956c19555b74f91b845dbc4d5f4f,
     type: 3}
-  speed: 0.75
+  speed: 2
   detectionRadius: 3
   enemyLayer:
     serializedVersion: 2

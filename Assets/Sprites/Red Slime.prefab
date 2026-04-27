@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -5797620761129893782}
   m_Layer: 0
   m_Name: Red Slime
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39ba0800eaa7b0149a04541734e49d6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 5493475223190975, guid: 7290b24b0ceb984439ecbb485199e490, type: 3}
+  player: {fileID: 0}
   speed: 2
   maxHealth: 10
   damage: 12

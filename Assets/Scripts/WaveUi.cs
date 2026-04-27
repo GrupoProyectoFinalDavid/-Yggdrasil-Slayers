@@ -1,12 +1,13 @@
 using UnityEngine;
-using TMPro; // Si usas Text normal cambia TMP_Text por Text y el using por UnityEngine.UI
+using TMPro;
 
 public class WaveUi : MonoBehaviour
 {
     [Header("Referencias UI")]
     public TMP_Text waveText;
     public TMP_Text timerText;
-    public TMP_Text statusText; // Mensaje de "Pulsa SPACE" o "¡Victoria!"
+    public TMP_Text totalTimeText;
+    public TMP_Text statusText;
 
     [Header("Referencia al GameManager")]
     public GameManager gameManager;
@@ -18,26 +19,38 @@ public class WaveUi : MonoBehaviour
         // ── Número de oleada ──
         if (gameManager.IsWaveActive || gameManager.CurrentWave > 0)
         {
-            waveText.text = $"Oleada  {gameManager.CurrentWave} / {gameManager.TotalWaves}";
+            waveText.text = $"Oleada {gameManager.CurrentWave} / {gameManager.TotalWaves}";
         }
         else
         {
             waveText.text = "Pulsa SPACE para empezar";
         }
 
-        // ── Tiempo restante ──
+        // ── Tiempo restante de oleada ──
         if (gameManager.IsWaveActive)
         {
             float t = gameManager.WaveTimeRemaining;
             timerText.text = $"{Mathf.CeilToInt(t):D2} s";
-
-            // Cambia a rojo cuando queden menos de 10 segundos
             timerText.color = t <= 10f ? Color.red : Color.white;
         }
         else
         {
             timerText.text = "--";
             timerText.color = Color.white;
+        }
+
+        // ── Tiempo total de partida ──
+        if (gameManager.GameStarted)
+        {
+            int totalSeconds = Mathf.FloorToInt(gameManager.TotalGameTime);
+            int minutes = totalSeconds / 60;
+            int seconds = totalSeconds % 60;
+
+            totalTimeText.text = $"{minutes:D2}:{seconds:D2}";
+        }
+        else
+        {
+            totalTimeText.text = "00:00";
         }
 
         // ── Mensaje de estado ──

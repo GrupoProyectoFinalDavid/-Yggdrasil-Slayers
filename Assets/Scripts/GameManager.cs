@@ -12,12 +12,13 @@ public class GameManager : MonoBehaviour
     public Vector2 spawnAreaSize = new Vector2(20f, 20f);
     public Vector3 spawnAreaCenter = Vector3.zero;
     public int TotalWaves => totalWaves;
+
     [Header("Restricción respecto al player")]
     public float minDistanceFromPlayer = 5f;
 
     [Header("Control de spawn")]
     public int maxSpawnAttempts = 30;
-    public float spawnInterval = 3f; // Segundos entre cada spawn dentro de la oleada
+    public float spawnInterval = 3f;
 
     [Header("Oleadas")]
     public int totalWaves = 3;
@@ -30,12 +31,22 @@ public class GameManager : MonoBehaviour
     private bool waveActive = false;
     private bool allWavesFinished = false;
 
+    // --- Tiempo total de partida ---
+    private float totalGameTime = 0f;
+    private bool gameStarted = false;
+
     void Update()
     {
         // Solo SPACE para arrancar la oleada 1
         if (Input.GetKeyDown(KeyCode.Space) && currentWave == 0 && !allWavesFinished)
         {
             StartNextWave();
+        }
+
+        // Tiempo total de partida
+        if (gameStarted && !allWavesFinished)
+        {
+            totalGameTime += Time.deltaTime;
         }
 
         if (waveActive)
@@ -62,6 +73,7 @@ public class GameManager : MonoBehaviour
         waveTimer = 0f;
         spawnTimer = 0f;
         waveActive = true;
+        gameStarted = true;
 
         Debug.Log($"── Oleada {currentWave} / {totalWaves} iniciada ──");
     }
@@ -83,7 +95,7 @@ public class GameManager : MonoBehaviour
 
         if (currentWave < totalWaves)
         {
-            Invoke(nameof(StartNextWave), 3f); // 3 segundos de pausa entre oleadas
+            Invoke(nameof(StartNextWave), 3f);
         }
         else
         {
@@ -91,6 +103,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("¡Has sobrevivido todas las oleadas!");
         }
     }
+
     // ──────────────────────────────────────────
     //  SPAWN PERIÓDICO DURANTE LA OLEADA
     // ──────────────────────────────────────────
@@ -188,11 +201,13 @@ public class GameManager : MonoBehaviour
     }
 
     // ──────────────────────────────────────────
-    //  GETTERS PÚBLICOS (útiles para UI)
+    //  GETTERS PÚBLICOS
     // ──────────────────────────────────────────
 
     public int CurrentWave => currentWave;
     public float WaveTimeRemaining => Mathf.Max(0f, waveDuration - waveTimer);
     public bool IsWaveActive => waveActive;
     public bool AllWavesFinished => allWavesFinished;
+    public float TotalGameTime => totalGameTime;
+    public bool GameStarted => gameStarted;
 }

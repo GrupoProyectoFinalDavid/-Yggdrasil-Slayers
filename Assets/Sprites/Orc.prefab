@@ -13,6 +13,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Orc
       objectReference: {fileID: 0}
+    - target: {fileID: -2253911629886400664, guid: e87f36f811de9a64e8ecd9ca9a36b51f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 3626916397498700004, guid: e87f36f811de9a64e8ecd9ca9a36b51f,
         type: 3}
       propertyPath: m_SortingOrder
@@ -146,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39ba0800eaa7b0149a04541734e49d6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 5493475223190975, guid: 7290b24b0ceb984439ecbb485199e490, type: 3}
+  player: {fileID: 0}
   speed: 3
   maxHealth: 10
   damage: 15

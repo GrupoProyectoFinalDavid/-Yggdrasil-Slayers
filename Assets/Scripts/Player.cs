@@ -4,28 +4,31 @@ using System.Collections.Generic;
 public class Player : MonoBehaviour
 {
     private PowerUpManager powerUpManager;
-
-
+    
     [Header("Movimiento")]
     public float speed = 5f;
 
     [Header("Vida")]
     public int maxHealth = 100;
     private int currentHealth;
-
+    
+    [Header("UI")]
+    public HealthBar healthBar;
+    
     private Vector2 movement;
     private Rigidbody2D rb;
     private Animator animator;
-
-    // Lista de power-ups
-    private List<PowerUpType> powerUps = new List<PowerUpType>();
+    
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
         currentHealth = maxHealth;
-        powerUpManager = GetComponent<PowerUpManager>();
+
+        if (healthBar != null)
+            healthBar.SetMaxHealth(maxHealth);
     }
 
     void Update()
@@ -36,12 +39,8 @@ public class Player : MonoBehaviour
 
         movement = new Vector2(moveX, moveY).normalized;
 
-        // Animación
         if (animator != null)
             animator.SetFloat("speed", movement.sqrMagnitude);
-
-        // Log continuo de power-ups
-        Debug.Log("PowerUps: " + string.Join(", ", powerUps));
     }
 
     void FixedUpdate()
@@ -51,25 +50,23 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
+
         currentHealth -= amount;
-        Debug.Log("Vida del jugador: " + currentHealth);
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        if (healthBar != null)
+            healthBar.SetHealth(currentHealth);
+
+        Debug.Log("Vida actual: " + currentHealth);
 
         if (currentHealth <= 0)
-        {
             Die();
-        }
     }
 
     void Die()
     {
         Debug.Log("El jugador ha muerto");
-        // Aquí puedes poner animación, reinicio de nivel, game over, etc.
         gameObject.SetActive(false);
-    }
-
-    public int GetCurrentHealth()
-    {
-        return currentHealth;
     }
 
     // Método para añadir power-ups
