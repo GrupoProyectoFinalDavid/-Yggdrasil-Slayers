@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3fa3e15f2a330864fbc6119e563b495f
+guid: e52dd356ba775b347bcb28192a869828
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1158201469468389350
-    second: Arrow01(100x100)_0
+      213: 3619186271911917407
+    second: "Elfos Oscuros (D\xF6kk\xE1lfar)_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 25
+  spritePixelsToUnits: 40
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Arrow01(100x100)_0
+      name: "Elfos Oscuros (D\xF6kk\xE1lfar)_0"
       rect:
         serializedVersion: 2
-        x: 40
-        y: 45
-        width: 21
-        height: 9
+        x: 0
+        y: 0
+        width: 60
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6efaffd9912c21010800000000000000
-      internalID: 1158201469468389350
+      spriteID: f57b7413dbee93230800000000000000
+      internalID: 3619186271911917407
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Arrow01(100x100)_0: 1158201469468389350
+      "Elfos Oscuros (D\xF6kk\xE1lfar)_0": 3619186271911917407
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6392107745295321330}
   - component: {fileID: 7544319723908828960}
   - component: {fileID: 5578069489785575330}
-  - component: {fileID: -5797620761129893782}
   - component: {fileID: 1017472886369209512}
+  - component: {fileID: -5797620761129893782}
   m_Layer: 10
   m_Name: Red Slime
   m_TagString: Enemy
@@ -113,23 +113,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-5797620761129893782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3913448981184429777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39ba0800eaa7b0149a04541734e49d6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 5493475223190975, guid: 7290b24b0ceb984439ecbb485199e490, type: 3}
-  speed: 1
-  maxHealth: 3
-  damage: 10
-  attackCooldown: 1
 --- !u!61 &1017472886369209512
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -176,3 +159,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.1999931, y: 0.7202058}
   m_EdgeRadius: 0
+--- !u!114 &-5797620761129893782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3913448981184429777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ba0800eaa7b0149a04541734e49d6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  speed: 1
+  maxHealth: 3
+  damage: 10
+  attackCooldown: 1

@@ -11,58 +11,109 @@ public class Enemy : MonoBehaviour
     [Header("Movimiento")]
     public float speed = 3f;
 
+    [Header("Tipo de enemigo")]
+    public bool isRangedEnemy = false;
+    public float stopDistance = 6f;
+
+    [Header("Disparo ranged")]
+    public GameObject enemyProjectilePrefab;
+    public Transform shootPoint;
+    public float shootCooldown = 1.5f;
+    public int projectileDamage = 20;
+    public float projectileSpeed = 6f;
+    private float lastShootTime;
+
     [Header("Vida")]
     public int maxHealth = 3;
     private int currentHealth;
 
-    [Header("Daño")]
+    [Header("Daño por contacto")]
     public int damage = 10;
-    public float attackCooldown = 1f; // tiempo entre golpes mientras toca al jugador
+    public float attackCooldown = 1f;
     private float lastAttackTime;
 
     private void Start()
     {
         currentHealth = maxHealth;
 
-        // Solo busca si GameManager no asignó ya el player
+        animator = GetComponent<Animator>();
+
+        if (animator != null)
+            animator.SetFloat("speed", speed);
+
         if (player == null)
         {
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+
             if (playerObj != null)
                 player = playerObj.transform;
             else
                 Debug.LogWarning("[Enemy] No se encontró ningún objeto con tag 'Player'.");
         }
-        else
-        {
-            // Animación
-            animator = GetComponent<Animator>();
-            animator.SetFloat("speed", speed);
-        }
     }
 
     void Update()
     {
-        FollowPlayer();
+        if (player == null) return;
+
+        if (isRangedEnemy)
+            RangedBehaviour();
+        else
+            FollowPlayer();
+    }
+
+    void RangedBehaviour()
+    {
+        float distance = Vector2.Distance(transform.position, player.position);
+
+        if (distance > stopDistance)
+        {
+            FollowPlayer();
+        }
+        else
+        {
+            LookAtPlayer();
+            Shoot();
+        }
     }
 
     void FollowPlayer()
     {
-        if (player == null) return;
-
         Vector3 direction = (player.position - transform.position).normalized;
 
-        // Movimiento
         transform.position += direction * speed * Time.deltaTime;
 
-        // Rotación en función del eje X (izquierda/derecha)
-        if (direction.x < 0)
-        {
+        LookAtPlayer();
+    }
+
+    void LookAtPlayer()
+    {
+        if (player.position.x < transform.position.x)
             transform.rotation = Quaternion.Euler(0f, 180f, 0f);
-        }
-        else if (direction.x > 0)
-        {
+        else if (player.position.x > transform.position.x)
             transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+    }
+
+    void Shoot()
+    {
+        if (enemyProjectilePrefab == null || shootPoint == null) return;
+
+        if (Time.time < lastShootTime + shootCooldown) return;
+
+        lastShootTime = Time.time;
+
+        GameObject projectile = Instantiate(
+            enemyProjectilePrefab,
+            shootPoint.position,
+            Quaternion.identity
+        );
+
+        EnemyProjectile projectileScript = projectile.GetComponent<EnemyProjectile>();
+
+        if (projectileScript != null)
+        {
+            Vector2 direction = (player.position - shootPoint.position).normalized;
+            projectileScript.Init(direction, projectileSpeed, projectileDamage);
         }
     }
 
@@ -71,9 +122,7 @@ public class Enemy : MonoBehaviour
         currentHealth -= amount;
 
         if (currentHealth <= 0)
-        {
             Die();
-        }
     }
 
     void Die()
