@@ -10,11 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5712694069141310946}
   - component: {fileID: 2210478505335803295}
-  - component: {fileID: 6746094134303010707}
   - component: {fileID: -3237139956487380970}
   - component: {fileID: 4114593094638422562}
   m_Layer: 10
-  m_Name: Blue Slime
+  m_Name: Draugr
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -7078261816480267791, guid: bfeede70efd14484683f5956b4f1194b,
+  m_Sprite: {fileID: -698271095930664092, guid: a92339ad90f9f2947a6a3a480ce4ec62,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -91,28 +90,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &6746094134303010707
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5001471821994202363}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 68555cc7381816a4b8e2742db37c34de, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &-3237139956487380970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,9 +104,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 5493475223190975, guid: 7290b24b0ceb984439ecbb485199e490, type: 3}
   speed: 1
+  isRangedEnemy: 0
+  stopDistance: 6
+  enemyProjectilePrefab: {fileID: 0}
+  shootPoint: {fileID: 0}
+  shootCooldown: 1.5
+  projectileDamage: 20
+  projectileSpeed: 6
   maxHealth: 3
   damage: 10
   attackCooldown: 1
+  wobbleSpeed: 8
+  wobbleAmount: 12
+  wobbleWhileIdle: 0
 --- !u!61 &4114593094638422562
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -167,8 +154,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0.36476624}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 1.125, y: 0.6875}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.25, y: 1.375}
     newSize: {x: 3, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

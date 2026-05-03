@@ -5,209 +5,75 @@ public class GameManager : MonoBehaviour
     [Header("Player")]
     public Transform player;
 
-    [Header("Prefabs de enemigos")]
-    public GameObject[] enemyPrefabs;
+    [Header("Salas del nivel")]
+    public Room[] rooms;
+    
+    public bool  GameStarted       { get; private set; }
+    public float TotalGameTime     { get; private set; }
+    public bool  AllRoomsCleared   { get; private set; }
 
-    [Header("Zona de spawn")]
-    public Vector2 spawnAreaSize = new Vector2(20f, 20f);
-    public Vector3 spawnAreaCenter = Vector3.zero;
-    public int TotalWaves => totalWaves;
-
-    [Header("Restricción respecto al player")]
-    public float minDistanceFromPlayer = 5f;
-
-    [Header("Control de spawn")]
-    public int maxSpawnAttempts = 30;
-    public float spawnInterval = 3f;
-
-    [Header("Oleadas")]
-    public int totalWaves = 3;
-    public float waveDuration = 60f;
-
-    // --- Estado interno de oleadas ---
-    private int currentWave = 0;
-    private float waveTimer = 0f;
-    private float spawnTimer = 0f;
-    private bool waveActive = false;
-    private bool allWavesFinished = false;
-
-    // --- Tiempo total de partida ---
-    private float totalGameTime = 0f;
-    private bool gameStarted = false;
-
-    void Update()
+    private int _roomsCleared = 0;
+    
+    private void Start()
     {
-        // Solo SPACE para arrancar la oleada 1
-        if (Input.GetKeyDown(KeyCode.Space) && currentWave == 0 && !allWavesFinished)
-        {
-            StartNextWave();
-        }
+        GameStarted = true;  // ← arranca al cargar la escena
 
-        // Tiempo total de partida
-        if (gameStarted && !allWavesFinished)
+        foreach (Room room in rooms)
         {
-            totalGameTime += Time.deltaTime;
-        }
-
-        if (waveActive)
-        {
-            HandleWaveTimer();
-            HandleSpawnTimer();
+            if (room != null && room.roomEvent != null)
+                room.roomEvent.OnEventCompleted += OnRoomCleared;
         }
     }
 
-    // ──────────────────────────────────────────
-    //  OLEADAS
-    // ──────────────────────────────────────────
-
-    void StartNextWave()
+    private void Update()
     {
-        if (currentWave >= totalWaves)
-        {
-            allWavesFinished = true;
-            Debug.Log("¡Todas las oleadas han terminado!");
-            return;
-        }
-
-        currentWave++;
-        waveTimer = 0f;
-        spawnTimer = 0f;
-        waveActive = true;
-        gameStarted = true;
-
-        Debug.Log($"── Oleada {currentWave} / {totalWaves} iniciada ──");
+        if (GameStarted && !AllRoomsCleared)
+            TotalGameTime += Time.deltaTime;
     }
 
-    void HandleWaveTimer()
-    {
-        waveTimer += Time.deltaTime;
 
-        if (waveTimer >= waveDuration)
+    private void OnRoomCleared()
+    {
+        if (!GameStarted) GameStarted = true;
+
+        _roomsCleared++;
+        Debug.Log($"[GameManager] Salas limpias: {_roomsCleared} / {rooms.Length}");
+
+        if (_roomsCleared >= CountRoomsWithEvents())
         {
-            EndCurrentWave();
+            AllRoomsCleared = true;
+            Debug.Log("[GameManager] ¡Todas las salas completadas!");
         }
     }
-
-    void EndCurrentWave()
+    
+    private int CountRoomsWithEvents()
     {
-        waveActive = false;
-        Debug.Log($"── Oleada {currentWave} terminada ──");
-
-        if (currentWave < totalWaves)
-        {
-            Invoke(nameof(StartNextWave), 3f);
-        }
-        else
-        {
-            allWavesFinished = true;
-            Debug.Log("¡Has sobrevivido todas las oleadas!");
-        }
+        int count = 0;
+        foreach (Room room in rooms)
+            if (room != null && room.roomEvent != null)
+                count++;
+        return count;
     }
-
-    // ──────────────────────────────────────────
-    //  SPAWN PERIÓDICO DURANTE LA OLEADA
-    // ──────────────────────────────────────────
-
-    void HandleSpawnTimer()
+    
+    public WaveEvent GetActiveWaveEvent()
     {
-        spawnTimer += Time.deltaTime;
-
-        if (spawnTimer >= spawnInterval)
+        foreach (Room room in rooms)
         {
-            spawnTimer = 0f;
-            SpawnRandomEnemy();
+            if (room == null) continue;
+            WaveEvent we = room.roomEvent as WaveEvent;
+            if (we != null && we.IsRunning) return we;
         }
+        return null;
     }
-
-    void SpawnRandomEnemy()
+    
+    public SurvivalEvent GetActiveSurvivalEvent()
     {
-        if (player == null)
+        foreach (Room room in rooms)
         {
-            Debug.LogWarning("No hay player asignado en el GameManager.");
-            return;
+            if (room == null) continue;
+            SurvivalEvent se = room.roomEvent as SurvivalEvent;
+            if (se != null && se.IsRunning) return se;
         }
-
-        if (enemyPrefabs == null || enemyPrefabs.Length == 0)
-        {
-            Debug.LogWarning("No hay prefabs de enemigos asignados.");
-            return;
-        }
-
-        Vector3 spawnPosition;
-        bool validPositionFound = TryGetValidSpawnPosition(out spawnPosition);
-
-        if (!validPositionFound)
-        {
-            Debug.LogWarning("No se encontró una posición válida para spawnear.");
-            return;
-        }
-
-        int randomEnemyIndex = Random.Range(0, enemyPrefabs.Length);
-        GameObject newEnemy = Instantiate(enemyPrefabs[randomEnemyIndex], spawnPosition, Quaternion.identity);
-
-        Enemy enemyScript = newEnemy.GetComponent<Enemy>();
-        if (enemyScript != null)
-        {
-            enemyScript.player = player;
-        }
-        else
-        {
-            Debug.LogWarning("El enemigo instanciado no tiene script Enemy.");
-        }
+        return null;
     }
-
-    // ──────────────────────────────────────────
-    //  POSICIÓN DE SPAWN VÁLIDA
-    // ──────────────────────────────────────────
-
-    bool TryGetValidSpawnPosition(out Vector3 validPosition)
-    {
-        for (int i = 0; i < maxSpawnAttempts; i++)
-        {
-            float randomX = Random.Range(-spawnAreaSize.x / 2f, spawnAreaSize.x / 2f);
-            float randomY = Random.Range(-spawnAreaSize.y / 2f, spawnAreaSize.y / 2f);
-
-            Vector3 candidatePosition = new Vector3(
-                spawnAreaCenter.x + randomX,
-                spawnAreaCenter.y + randomY,
-                spawnAreaCenter.z
-            );
-
-            if (Vector3.Distance(candidatePosition, player.position) >= minDistanceFromPlayer)
-            {
-                validPosition = candidatePosition;
-                return true;
-            }
-        }
-
-        validPosition = Vector3.zero;
-        return false;
-    }
-
-    // ──────────────────────────────────────────
-    //  GIZMOS
-    // ──────────────────────────────────────────
-
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(spawnAreaCenter, new Vector3(spawnAreaSize.x, spawnAreaSize.y, 0.1f));
-
-        if (player != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(player.position, minDistanceFromPlayer);
-        }
-    }
-
-    // ──────────────────────────────────────────
-    //  GETTERS PÚBLICOS
-    // ──────────────────────────────────────────
-
-    public int CurrentWave => currentWave;
-    public float WaveTimeRemaining => Mathf.Max(0f, waveDuration - waveTimer);
-    public bool IsWaveActive => waveActive;
-    public bool AllWavesFinished => allWavesFinished;
-    public float TotalGameTime => totalGameTime;
-    public bool GameStarted => gameStarted;
 }

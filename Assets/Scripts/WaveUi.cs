@@ -16,57 +16,58 @@ public class WaveUi : MonoBehaviour
     {
         if (gameManager == null) return;
 
-        // ── Número de oleada ──
-        if (gameManager.IsWaveActive || gameManager.CurrentWave > 0)
-        {
-            waveText.text = $"Oleada {gameManager.CurrentWave} / {gameManager.TotalWaves}";
-        }
-        else
-        {
-            waveText.text = "Pulsa SPACE para empezar";
-        }
+        // ── Tiempo total de partida ───────────────────────
+        int totalSeconds = Mathf.FloorToInt(gameManager.TotalGameTime);
+        int minutes = totalSeconds / 60;
+        int seconds = totalSeconds % 60;
+        totalTimeText.text = $"{minutes:D2}:{seconds:D2}";
 
-        // ── Tiempo restante de oleada ──
-        if (gameManager.IsWaveActive)
-        {
-            float t = gameManager.WaveTimeRemaining;
-            timerText.text = $"{Mathf.CeilToInt(t):D2} s";
-            timerText.color = t <= 10f ? Color.red : Color.white;
-        }
-        else
-        {
-            timerText.text = "--";
-            timerText.color = Color.white;
-        }
+        // ── Detectar evento activo ────────────────────────
+        WaveEvent     activeWave     = gameManager.GetActiveWaveEvent();
+        SurvivalEvent activeSurvival = gameManager.GetActiveSurvivalEvent();
 
-        // ── Tiempo total de partida ──
-        if (gameManager.GameStarted)
+        if (activeWave != null)
         {
-            int totalSeconds = Mathf.FloorToInt(gameManager.TotalGameTime);
-            int minutes = totalSeconds / 60;
-            int seconds = totalSeconds % 60;
+            // Modo oleadas
+            waveText.text = $"Oleada {activeWave.CurrentWaveIndex} / {activeWave.TotalWaves}";
 
-            totalTimeText.text = $"{minutes:D2}:{seconds:D2}";
-        }
-        else
-        {
-            totalTimeText.text = "00:00";
-        }
+            int enemies = activeWave.EnemiesAlive;
+            timerText.text  = $"Enemigos: {enemies}";
+            timerText.color = enemies > 0 ? Color.red : Color.green;
 
-        // ── Mensaje de estado ──
-        if (gameManager.AllWavesFinished)
-        {
-            statusText.text = "¡Has sobrevivido!";
-            statusText.color = Color.yellow;
-        }
-        else if (!gameManager.IsWaveActive && gameManager.CurrentWave > 0)
-        {
-            statusText.text = "Siguiente oleada en breve...";
+            statusText.text  = activeWave.WaitingForNextWave ? "Siguiente oleada en breve..." : "";
             statusText.color = Color.white;
         }
+        else if (activeSurvival != null)
+        {
+            // Modo supervivencia
+            waveText.text = "¡Modo Supervivencia!";
+
+            float t = activeSurvival.TimeRemaining;
+            int m   = Mathf.FloorToInt(t) / 60;
+            int s   = Mathf.FloorToInt(t) % 60;
+            timerText.text  = $"{m:D2}:{s:D2}";
+            timerText.color = t <= 30f ? Color.red : Color.white;
+
+            statusText.text  = $"Enemigos vivos: {activeSurvival.EnemiesAlive}";
+            statusText.color = Color.white;
+        }
+        else if (gameManager.AllRoomsCleared)
+        {
+            // Victoria
+            waveText.text   = "¡Has sobrevivido!";
+            timerText.text  = "--";
+            timerText.color = Color.white;
+            statusText.text  = "Todas las salas limpias";
+            statusText.color = Color.yellow;
+        }
         else
         {
-            statusText.text = "";
+            // Sin evento activo
+            waveText.text   = "Entra en una sala para empezar";
+            timerText.text  = "--";
+            timerText.color = Color.white;
+            statusText.text  = "";
         }
     }
 }

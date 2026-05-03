@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -30,7 +31,7 @@ public class Player : MonoBehaviour
         if (healthBar != null)
             healthBar.SetMaxHealth(maxHealth);
     }
-
+    
     void Update()
     {
         // Movimiento
@@ -74,4 +75,21 @@ public class Player : MonoBehaviour
     {
         powerUpManager.AddPowerUp(data);
     }
+    
+    public Coroutine Teleport(Vector2 pos)
+    {
+        return StartCoroutine(TeleportRoutine(pos));
+    }
+
+    private IEnumerator TeleportRoutine(Vector2 pos)
+    {
+        rb.linearVelocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+        yield return new WaitForFixedUpdate();
+        rb.position = pos;
+        transform.position = pos;
+
+        yield return new WaitForFixedUpdate();
+    }
+    
 }

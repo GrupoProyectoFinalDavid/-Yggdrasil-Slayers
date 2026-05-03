@@ -11,20 +11,46 @@ public class Enemy : MonoBehaviour
     [Header("Movimiento")]
     public float speed = 3f;
 
+    [Header("Tipo de enemigo")]
+    public bool isRangedEnemy = false;
+    public float stopDistance = 6f;
+
+    [Header("Disparo ranged")]
+    public GameObject enemyProjectilePrefab;
+    public Transform shootPoint;
+    public float shootCooldown = 1.5f;
+    public int projectileDamage = 20;
+    public float projectileSpeed = 6f;
+    private float lastShootTime;
+
     [Header("Vida")]
     public int maxHealth = 3;
     private int currentHealth;
 
-    [Header("Daño")]
+    [Header("Daño por contacto")]
     public int damage = 10;
-    public float attackCooldown = 1f; // tiempo entre golpes mientras toca al jugador
+    public float attackCooldown = 1f;
     private float lastAttackTime;
+
+    [Header("Rotación / Bamboleo")]
+    public float wobbleSpeed = 8f;       // Velocidad de la oscilación
+    public float wobbleAmount = 12f;     // Grados máximos de inclinación
+    public bool wobbleWhileIdle = false; // ¿Bambolear también al estar quieto?
+
+    // Estado interno
+    private bool isFacingRight = true;
+    private bool isMoving = false;
+    private float wobbleTime = 0f;
+    private float currentWobbleAngle = 0f;
 
     private void Start()
     {
         currentHealth = maxHealth;
+        animator = GetComponent<Animator>();
 
-        // Solo busca si GameManager no asignó ya el player
+        if (animator != null)
+            animator.SetFloat("speed", speed);
+
         if (player == null)
         {
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
@@ -33,47 +59,111 @@ public class Enemy : MonoBehaviour
             else
                 Debug.LogWarning("[Enemy] No se encontró ningún objeto con tag 'Player'.");
         }
-        else
-        {
-            // Animación
-            animator = GetComponent<Animator>();
-            animator.SetFloat("speed", speed);
-        }
     }
 
     void Update()
     {
-        FollowPlayer();
+        if (player == null) return;
+
+        if (isRangedEnemy)
+            RangedBehaviour();
+        else
+            FollowPlayer();
+
+        ApplyWobble();
+    }
+
+    // ─── Bamboleo ───────────────────────────────────────────────────────────
+
+    void ApplyWobble()
+    {
+        if (!isMoving && !wobbleWhileIdle)
+        {
+            // Vuelve suavemente a 0 cuando está quieto
+            currentWobbleAngle = Mathf.Lerp(currentWobbleAngle, 0f, Time.deltaTime * wobbleSpeed);
+        }
+        else
+        {
+            wobbleTime += Time.deltaTime * wobbleSpeed;
+            float sineValue = Mathf.Sin(wobbleTime);
+            currentWobbleAngle = sineValue * wobbleAmount;
+        }
+
+        // Mantiene el flip horizontal y aplica el bamboleo en Z
+        float yRotation = isFacingRight ? 0f : 180f;
+        transform.rotation = Quaternion.Euler(0f, yRotation, currentWobbleAngle);
+    }
+
+    // ─── Comportamiento ──────────────────────────────────────────────────────
+
+    void RangedBehaviour()
+    {
+        float distance = Vector2.Distance(transform.position, player.position);
+
+        if (distance > stopDistance)
+        {
+            MoveTowardsPlayer();
+        }
+        else
+        {
+            isMoving = false;
+            LookAtPlayer();
+            Shoot();
+        }
     }
 
     void FollowPlayer()
     {
-        if (player == null) return;
+        MoveTowardsPlayer();
+    }
 
+    void MoveTowardsPlayer()
+    {
         Vector3 direction = (player.position - transform.position).normalized;
-
-        // Movimiento
         transform.position += direction * speed * Time.deltaTime;
+        isMoving = true;
+        LookAtPlayer();
+    }
 
-        // Rotación en función del eje X (izquierda/derecha)
-        if (direction.x < 0)
+    void LookAtPlayer()
+    {
+        // Solo actualiza el flag; la rotación real la aplica ApplyWobble()
+        if (player.position.x < transform.position.x)
+            isFacingRight = false;
+        else if (player.position.x > transform.position.x)
+            isFacingRight = true;
+    }
+
+    // ─── Disparo ─────────────────────────────────────────────────────────────
+
+    void Shoot()
+    {
+        if (enemyProjectilePrefab == null || shootPoint == null) return;
+        if (Time.time < lastShootTime + shootCooldown) return;
+
+        lastShootTime = Time.time;
+
+        GameObject projectile = Instantiate(
+            enemyProjectilePrefab,
+            shootPoint.position,
+            Quaternion.identity
+        );
+
+        EnemyProjectile projectileScript = projectile.GetComponent<EnemyProjectile>();
+        if (projectileScript != null)
         {
-            transform.rotation = Quaternion.Euler(0f, 180f, 0f);
-        }
-        else if (direction.x > 0)
-        {
-            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            Vector2 direction = (player.position - shootPoint.position).normalized;
+            projectileScript.Init(direction, projectileSpeed, projectileDamage);
         }
     }
+
+    // ─── Daño / Muerte ───────────────────────────────────────────────────────
 
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
-
         if (currentHealth <= 0)
-        {
             Die();
-        }
     }
 
     void Die()
@@ -88,7 +178,6 @@ public class Enemy : MonoBehaviour
             if (Time.time >= lastAttackTime + attackCooldown)
             {
                 Player playerScript = collision.gameObject.GetComponent<Player>();
-
                 if (playerScript != null)
                 {
                     playerScript.TakeDamage(damage);
