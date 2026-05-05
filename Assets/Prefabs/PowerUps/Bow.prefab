@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3307158963247545493}
   - component: {fileID: 1419650953417233557}
   - component: {fileID: 4108824269668499590}
-  - component: {fileID: 5858239690116255093}
+  - component: {fileID: 3737032256327766341}
   m_Layer: 0
   m_Name: Bow
   m_TagString: Untagged
@@ -136,7 +136,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.7397937, y: 1.7386622}
   m_EdgeRadius: 0
---- !u!114 &5858239690116255093
+--- !u!114 &3737032256327766341
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,11 +145,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2874450886825983640}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 846b125e5f2667d4aabef8ef9ae3ca37, type: 3}
+  m_Script: {fileID: 11500000, guid: 1505fce508f13354babce20ad40f1732, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 4
-  projectilePrefab: {fileID: 4947616241670621276, guid: ed52466f470137a4b807c558b6324fcc,
-    type: 3}
-  cooldown: 1
-  detectionRadius: 6
+  powerUpData: {fileID: 11400000, guid: 0b233ea5ee46cbe49ab5bcd7e066ba4c, type: 2}

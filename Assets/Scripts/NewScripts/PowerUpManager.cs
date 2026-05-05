@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class PowerUpManager : MonoBehaviour
 {
@@ -27,6 +28,11 @@ public class PowerUpManager : MonoBehaviour
         if (existing != null)
         {
             existing.LevelUp();
+
+            if (data.isPassive)
+            {
+                existing.ApplyPassive(stats);
+            }
         }
         else
         {
@@ -36,5 +42,10 @@ public class PowerUpManager : MonoBehaviour
             if (data.isPassive)
                 newPU.ApplyPassive(stats);
         }
+    }
+
+    public void StartAbilityCoroutine(IEnumerator coroutine)
+    {
+        StartCoroutine(coroutine);
     }
 }

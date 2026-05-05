@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUpName: Fire Staff
   isPassive: 0
+  passiveType: 0
   damagePerLevel:
   - 10
   - 15
   - 20
   - 25
+  projectileCountPerLevel: 01000000030000000500000007000000
   cooldownPerLevel:
   - 2
   - 1.5
@@ -29,4 +31,3 @@ MonoBehaviour:
   maxLevel: 4
   abilities:
   - {fileID: 11400000, guid: 9116b075fb3dba34d81e9043fbe92886, type: 2}
-  - {fileID: 11400000, guid: f7f863e99a54a6443b003db4c8ffbeb1, type: 2}

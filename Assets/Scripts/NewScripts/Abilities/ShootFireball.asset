@@ -15,7 +15,9 @@ MonoBehaviour:
   projectilePrefab: {fileID: 7167631146440875769, guid: 13cd956c19555b74f91b845dbc4d5f4f,
     type: 3}
   speed: 2
-  detectionRadius: 3
+  fireMode: 0
+  singleTargetDelay: 0.15
+  detectionRadius: 7
   enemyLayer:
     serializedVersion: 2
     m_Bits: 1024

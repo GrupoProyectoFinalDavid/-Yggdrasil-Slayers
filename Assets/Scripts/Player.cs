@@ -4,14 +4,11 @@ using System.Collections.Generic;
 public class Player : MonoBehaviour
 {
     private PowerUpManager powerUpManager;
+    private PlayerStats stats;
 
 
     [Header("Movimiento")]
     public float speed = 5f;
-
-    [Header("Vida")]
-    public int maxHealth = 100;
-    private int currentHealth;
 
     private Vector2 movement;
     private Rigidbody2D rb;
@@ -24,8 +21,10 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        currentHealth = maxHealth;
-        powerUpManager = GetComponent<PowerUpManager>();
+
+        stats = GetComponent<PlayerStats>();
+
+        stats.currentHealth = stats.maxHealth;
     }
 
     void Update()
@@ -40,8 +39,8 @@ public class Player : MonoBehaviour
         if (animator != null)
             animator.SetFloat("speed", movement.sqrMagnitude);
 
-        // Log continuo de power-ups
-        Debug.Log("PowerUps: " + string.Join(", ", powerUps));
+        // Logs de la vida
+        Debug.Log($"HP: {stats.currentHealth} / {stats.maxHealth}");
     }
 
     void FixedUpdate()
@@ -51,10 +50,11 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        currentHealth -= amount;
-        Debug.Log("Vida del jugador: " + currentHealth);
+        stats.currentHealth -= amount;
 
-        if (currentHealth <= 0)
+        Debug.Log("Vida del jugador: " + stats.currentHealth);
+
+        if (stats.currentHealth <= 0)
         {
             Die();
         }
@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
 
     public int GetCurrentHealth()
     {
-        return currentHealth;
+        return (int)stats.currentHealth;
     }
 
     // Método para añadir power-ups

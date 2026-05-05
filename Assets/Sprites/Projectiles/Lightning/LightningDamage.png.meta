@@ -1,0 +1,389 @@
+fileFormatVersion: 2
+guid: 9b2cb2e6e6f4b7141be7c701a0a25af3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2028498076684705063
+    second: LightningDamage_0
+  - first:
+      213: -3359394647499641640
+    second: LightningDamage_1
+  - first:
+      213: 3743188323606007784
+    second: LightningDamage_2
+  - first:
+      213: -6339047000854219866
+    second: LightningDamage_3
+  - first:
+      213: 2137301928019630339
+    second: LightningDamage_4
+  - first:
+      213: -439007847757783422
+    second: LightningDamage_5
+  - first:
+      213: 1479448453938349194
+    second: LightningDamage_6
+  - first:
+      213: 6148547051347271049
+    second: LightningDamage_7
+  - first:
+      213: -3061060275049523927
+    second: LightningDamage_8
+  - first:
+      213: -985066205071718799
+    second: LightningDamage_9
+  - first:
+      213: -5502258892382603831
+    second: LightningDamage_10
+  - first:
+      213: -4721162753628243115
+    second: LightningDamage_11
+  - first:
+      213: -2966146599847474278
+    second: LightningDamage_12
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: LightningDamage_0
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 18
+        width: 11
+        height: 253
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d225a72fb359d3e0800000000000000
+      internalID: -2028498076684705063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningDamage_1
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 18
+        width: 17
+        height: 253
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8dc6f6fed580161d0800000000000000
+      internalID: -3359394647499641640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningDamage_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 18
+        width: 18
+        height: 253
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ef0de3b2f972f330800000000000000
+      internalID: 3743188323606007784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningDamage_3
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 17
+        width: 47
+        height: 254
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a33493a65e2708a0800000000000000
+      internalID: -6339047000854219866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningDamage_4
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 18
+        width: 45
+        height: 253
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3091e5597c839ad10800000000000000
+      internalID: 2137301928019630339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningDamage_5
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 21
+        width: 37
+        height: 250
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28ed9cc30b458e9f0800000000000000
+      internalID: -439007847757783422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningDamage_6
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 22
+        width: 22
+        height: 249
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a840f78c78e088410800000000000000
+      internalID: 1479448453938349194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningDamage_9
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 20
+        width: 17
+        height: 252
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 176457e61875452f0800000000000000
+      internalID: -985066205071718799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningDamage_11
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 24
+        width: 13
+        height: 247
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55bfe274d7f0b7eb0800000000000000
+      internalID: -4721162753628243115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningDamage_12
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 24
+        width: 7
+        height: 248
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9bcb5cf16126d6d0800000000000000
+      internalID: -2966146599847474278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: dff6e00197dd360488b8aaffb927fdaa
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      LightningDamage_0: -2028498076684705063
+      LightningDamage_1: -3359394647499641640
+      LightningDamage_10: -5502258892382603831
+      LightningDamage_11: -4721162753628243115
+      LightningDamage_12: -2966146599847474278
+      LightningDamage_2: 3743188323606007784
+      LightningDamage_3: -6339047000854219866
+      LightningDamage_4: 2137301928019630339
+      LightningDamage_5: -439007847757783422
+      LightningDamage_6: 1479448453938349194
+      LightningDamage_7: 6148547051347271049
+      LightningDamage_8: -3061060275049523927
+      LightningDamage_9: -985066205071718799
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

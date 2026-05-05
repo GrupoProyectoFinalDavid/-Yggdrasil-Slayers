@@ -19,11 +19,14 @@ MonoBehaviour:
   - 20
   - 30
   - 40
+  projectileCountPerLevel: 01000000020000000300000004000000
   cooldownPerLevel:
   - 1.5
   - 1.25
   - 1
   - 0.5
+  durationPerLevel: []
+  radiusPerLevel: []
   maxLevel: 4
   abilities:
   - {fileID: 11400000, guid: e26d5ede0483ad542a848a7ef2f41fdc, type: 2}

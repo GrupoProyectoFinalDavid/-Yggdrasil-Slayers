@@ -36,7 +36,11 @@ public class Projectile : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<Enemy>().TakeDamage((int)damage);
+            PlayerStats stats = owner.GetComponent<PlayerStats>();
+
+            float finalDamage = DamageCalculator.Calculate(damage, stats);
+
+            other.GetComponent<Enemy>().TakeDamage((int)finalDamage);
 
             if (impactEffectPrefab != null)
             {

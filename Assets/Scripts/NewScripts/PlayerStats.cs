@@ -3,7 +3,9 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     [Header("Stats base")]
-    public float life = 100f;
+    [Header("Vida")]
+    public float maxHealth = 100f;
+    public float currentHealth;
     public float armor = 10f;
     public float movementSpeed = 5f;
     public float luck = 1f;
@@ -18,6 +20,10 @@ public class PlayerStats : MonoBehaviour
     public float cooldownMultiplier = 1f;
     public float effectDurationMultiplier = 1f;
 
+    void Start()
+    {
+        currentHealth = maxHealth;
+    }
     public void ResetStats()
     {
 
@@ -27,5 +33,6 @@ public class PlayerStats : MonoBehaviour
         areaMultiplier = 1f;
         cooldownMultiplier = 1f;
         effectDurationMultiplier = 1f;
+        currentHealth = maxHealth;
     }
 }
