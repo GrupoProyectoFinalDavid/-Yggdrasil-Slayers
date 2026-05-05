@@ -5118,18 +5118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1744044709}
-  enemyPrefabs:
-  - {fileID: 5001471821994202363, guid: ab3a390d8c3e7e6429cba2e75888616f, type: 3}
-  - {fileID: 7603247452742976850, guid: 1c0063fcf151e10469bf922e6b1bfd1b, type: 3}
-  - {fileID: 323397573781496505, guid: a64c086d529b17d40a73976a55492aea, type: 3}
-  - {fileID: 3913448981184429777, guid: 03c2fd3fb82509845b9f60f52926bb93, type: 3}
-  spawnAreaSize: {x: 20, y: 20}
-  spawnAreaCenter: {x: 0, y: 0, z: 0}
-  minDistanceFromPlayer: 5
-  maxSpawnAttempts: 30
-  spawnInterval: 1
-  totalWaves: 3
-  waveDuration: 60
+  rooms: []
 --- !u!4 &627239782
 Transform:
   m_ObjectHideFlags: 0
@@ -5670,6 +5659,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   maxHealth: 100
+  healthBar: {fileID: 0}
 --- !u!114 &1744044712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5736,6 +5726,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveText: {fileID: 1622939248}
   timerText: {fileID: 494647061}
+  totalTimeText: {fileID: 0}
   statusText: {fileID: 2115728698}
   gameManager: {fileID: 627239781}
 --- !u!4 &1857528012
