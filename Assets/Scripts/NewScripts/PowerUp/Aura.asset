@@ -14,16 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUpName: Ajo
   isPassive: 0
+  passiveType: 0
   damagePerLevel:
   - 5
   - 10
   - 15
   - 20
+  lifeBoostPerLevel: []
+  projectileCountPerLevel: 
   cooldownPerLevel:
   - 3
   - 2.5
   - 2
   - 1.5
+  tickRatePerLevel:
+  - 0.5
   durationPerLevel:
   - 1.5
   - 1.5

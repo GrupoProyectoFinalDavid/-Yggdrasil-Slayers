@@ -39,26 +39,45 @@ public class LightningStrikeAbility : AbilityBehaviour
     {
         if (target == null) yield break;
 
-        // 1. Spawn warning
-        GameObject warning = Instantiate(warningPrefab, target.position, Quaternion.identity);
+        // Offset fijo para evitar vibraciones al girar el enemigo
+        Vector3 offset = Vector3.zero;
 
-        // 2. Hacer que siga al enemigo
-        warning.transform.SetParent(target);
+        // Spawn warning
+        GameObject warning = Instantiate(
+            warningPrefab,
+            target.position + offset,
+            Quaternion.identity
+        );
 
-        yield return new WaitForSeconds(warningDuration);
+        // Seguir posición del enemigo manualmente
+        float timer = 0f;
 
-        if (target == null)
+        while (timer < warningDuration)
         {
-            Destroy(warning);
-            yield break;
+            if (target == null)
+            {
+                Destroy(warning);
+                yield break;
+            }
+
+            // Actualizar posición
+            warning.transform.position = target.position + offset;
+
+            timer += Time.deltaTime;
+            yield return null;
         }
 
-        // 3. Spawn impacto en posición ACTUAL del enemigo
-        Vector3 impactPos = target.position;
+        // Congelar warning en la última posición
+        Vector3 impactPos = warning.transform.position;
 
-        Instantiate(impactPrefab, impactPos, Quaternion.identity);
+        // Lanzar rayo
+        GameObject impact = Instantiate(
+            impactPrefab,
+            impactPos,
+            Quaternion.identity
+        );
 
-        // 4. Daño en área en la posición ACTUAL
+        // Aplicar daño JUSTO cuando empieza el rayo
         Collider2D[] hits = Physics2D.OverlapCircleAll(
             impactPos,
             impactRadius,
@@ -69,10 +88,27 @@ public class LightningStrikeAbility : AbilityBehaviour
         {
             if (hit.CompareTag("Enemy"))
             {
-                hit.GetComponent<Enemy>().TakeDamage((int)powerUp.GetDamage());
+                hit.GetComponent<Enemy>()
+                    .TakeDamage((int)powerUp.GetDamage());
             }
         }
 
+        // Esperar a que termine la animación del rayo
+        Animator impactAnimator = impact.GetComponent<Animator>();
+
+        if (impactAnimator != null)
+        {
+            float clipLength =
+                impactAnimator.GetCurrentAnimatorStateInfo(0).length;
+
+            yield return new WaitForSeconds(clipLength);
+        }
+        else
+        {
+            yield return new WaitForSeconds(1f);
+        }
+
+        // Ahora sí destruir warning
         Destroy(warning);
     }
 }

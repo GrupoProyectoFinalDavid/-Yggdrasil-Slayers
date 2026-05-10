@@ -1,0 +1,605 @@
+fileFormatVersion: 2
+guid: cf72fc411bd25774fa7548511e78adf7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7068188793285781625
+    second: fireArrowZone_0
+  - first:
+      213: -6271280704247794150
+    second: fireArrowZone_1
+  - first:
+      213: 6649832705302813351
+    second: fireArrowZone_2
+  - first:
+      213: 5714002944851957247
+    second: fireArrowZone_3
+  - first:
+      213: -6686535344392233498
+    second: fireArrowZone_4
+  - first:
+      213: 961750515741000408
+    second: fireArrowZone_5
+  - first:
+      213: 5362435712308888557
+    second: fireArrowZone_6
+  - first:
+      213: -1562166065007186108
+    second: fireArrowZone_7
+  - first:
+      213: -2809583001407135049
+    second: fireArrowZone_8
+  - first:
+      213: 7644869545159218871
+    second: fireArrowZone_9
+  - first:
+      213: -5473735381506937392
+    second: fireArrowZone_10
+  - first:
+      213: 4788237714915443240
+    second: fireArrowZone_11
+  - first:
+      213: -1617743373029935303
+    second: fireArrowZone_12
+  - first:
+      213: 3104056009025314681
+    second: fireArrowZone_13
+  - first:
+      213: 519371712665606580
+    second: fireArrowZone_14
+  - first:
+      213: -1096806254506262814
+    second: fireArrowZone_15
+  - first:
+      213: 8064043054970111671
+    second: fireArrowZone_16
+  - first:
+      213: 5279035167816072592
+    second: fireArrowZone_17
+  - first:
+      213: 4962275180779152337
+    second: fireArrowZone_18
+  - first:
+      213: 6083676957379618874
+    second: fireArrowZone_19
+  - first:
+      213: 7524844119946133606
+    second: fireArrowZone_20
+  - first:
+      213: 846156175619982288
+    second: fireArrowZone_21
+  - first:
+      213: 2705595205250304043
+    second: fireArrowZone_22
+  - first:
+      213: -8745095328242648020
+    second: fireArrowZone_23
+  - first:
+      213: -2587544387462865178
+    second: fireArrowZone_24
+  - first:
+      213: 9133980061961063902
+    second: fireArrowZone_25
+  - first:
+      213: 7418351627987283808
+    second: fireArrowZone_26
+  - first:
+      213: -4669388489530441035
+    second: fireArrowZone_27
+  - first:
+      213: 3197054019140565937
+    second: fireArrowZone_28
+  - first:
+      213: -2962302654851282174
+    second: fireArrowZone_29
+  - first:
+      213: -6620636570166135607
+    second: fireArrowZone_30
+  - first:
+      213: -2526250986755353747
+    second: fireArrowZone_31
+  - first:
+      213: -1546581568530077728
+    second: fireArrowZone_32
+  - first:
+      213: -6360434479747703199
+    second: fireArrowZone_33
+  - first:
+      213: 6317818017929153637
+    second: fireArrowZone_34
+  - first:
+      213: 6886285520496914694
+    second: fireArrowZone_35
+  - first:
+      213: 4296726012304833707
+    second: fireArrowZone_36
+  - first:
+      213: 8060580196248836870
+    second: fireArrowZone_37
+  - first:
+      213: -8069660314984959350
+    second: fireArrowZone_38
+  - first:
+      213: -3180548741233012521
+    second: fireArrowZone_39
+  - first:
+      213: -8390297731890855792
+    second: fireArrowZone_40
+  - first:
+      213: -3990899208772573447
+    second: fireArrowZone_41
+  - first:
+      213: -8850806562602285873
+    second: fireArrowZone_42
+  - first:
+      213: 2253960844003199192
+    second: fireArrowZone_43
+  - first:
+      213: 5935269062478184704
+    second: fireArrowZone_44
+  - first:
+      213: -5507933517375053326
+    second: fireArrowZone_45
+  - first:
+      213: 7151735158294685604
+    second: fireArrowZone_46
+  - first:
+      213: 6578470466779646098
+    second: fireArrowZone_47
+  - first:
+      213: 1540493746532128224
+    second: fireArrowZone_48
+  - first:
+      213: 7306680851561752594
+    second: fireArrowZone_49
+  - first:
+      213: 7922998987412886195
+    second: fireArrowZone_50
+  - first:
+      213: -7152240769051758602
+    second: fireArrowZone_51
+  - first:
+      213: -7964562979473633804
+    second: fireArrowZone_52
+  - first:
+      213: 281889254687328561
+    second: fireArrowZone_53
+  - first:
+      213: -8837033250944295980
+    second: fireArrowZone_54
+  - first:
+      213: 6749657195745758024
+    second: fireArrowZone_55
+  - first:
+      213: -7837189992530436137
+    second: fireArrowZone_56
+  - first:
+      213: -5231705738699713417
+    second: fireArrowZone_57
+  - first:
+      213: 7188142667177268999
+    second: fireArrowZone_58
+  - first:
+      213: 6270576847620509517
+    second: fireArrowZone_59
+  - first:
+      213: -4875030871932755659
+    second: fireArrowZone_60
+  - first:
+      213: 1362805128842869342
+    second: fireArrowZone_61
+  - first:
+      213: -909277107746741124
+    second: fireArrowZone_62
+  - first:
+      213: -7433993533122667943
+    second: fireArrowZone_63
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: fireArrowZone_1
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 778
+        width: 270
+        height: 244
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97822353240471260800000000000000
+      internalID: 7068188793285781625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fireArrowZone_2
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 778
+        width: 270
+        height: 244
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a167c881d6fe7f8a0800000000000000
+      internalID: -6271280704247794150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fireArrowZone_3
+      rect:
+        serializedVersion: 2
+        x: 924
+        y: 779
+        width: 270
+        height: 244
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7aa5957fc93f84c50800000000000000
+      internalID: 6649832705302813351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fireArrowZone_4
+      rect:
+        serializedVersion: 2
+        x: 1227
+        y: 780
+        width: 270
+        height: 244
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff5df6d77673c4f40800000000000000
+      internalID: 5714002944851957247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fireArrowZone_5
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 527
+        width: 270
+        height: 244
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ed1863f787a433a0800000000000000
+      internalID: -6686535344392233498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fireArrowZone_6
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 527
+        width: 270
+        height: 244
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d28a4d9ff2d85d00800000000000000
+      internalID: 961750515741000408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fireArrowZone_7
+      rect:
+        serializedVersion: 2
+        x: 637
+        y: 529
+        width: 270
+        height: 244
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de34a037ed23b6a40800000000000000
+      internalID: 5362435712308888557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fireArrowZone_8
+      rect:
+        serializedVersion: 2
+        x: 934
+        y: 530
+        width: 270
+        height: 244
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44fa3179d32125ae0800000000000000
+      internalID: -1562166065007186108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fireArrowZone_9
+      rect:
+        serializedVersion: 2
+        x: 1224
+        y: 532
+        width: 290
+        height: 244
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b2e622652b5209d0800000000000000
+      internalID: -2809583001407135049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fireArrowZone_0
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 779
+        width: 270
+        height: 244
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09db87ef386e24940800000000000000
+      internalID: 5279035167816072592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: e931e8a02e783c44cbf84778ba11c904
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      fireArrowZone_0: 5279035167816072592
+      fireArrowZone_1: 7068188793285781625
+      fireArrowZone_10: -5473735381506937392
+      fireArrowZone_11: 4788237714915443240
+      fireArrowZone_12: -1617743373029935303
+      fireArrowZone_13: 3104056009025314681
+      fireArrowZone_14: 519371712665606580
+      fireArrowZone_15: -1096806254506262814
+      fireArrowZone_16: 8064043054970111671
+      fireArrowZone_18: 4962275180779152337
+      fireArrowZone_19: 6083676957379618874
+      fireArrowZone_2: -6271280704247794150
+      fireArrowZone_20: 7524844119946133606
+      fireArrowZone_21: 846156175619982288
+      fireArrowZone_22: 2705595205250304043
+      fireArrowZone_23: -8745095328242648020
+      fireArrowZone_24: -2587544387462865178
+      fireArrowZone_25: 9133980061961063902
+      fireArrowZone_26: 7418351627987283808
+      fireArrowZone_27: -4669388489530441035
+      fireArrowZone_28: 3197054019140565937
+      fireArrowZone_29: -2962302654851282174
+      fireArrowZone_3: 6649832705302813351
+      fireArrowZone_30: -6620636570166135607
+      fireArrowZone_31: -2526250986755353747
+      fireArrowZone_32: -1546581568530077728
+      fireArrowZone_33: -6360434479747703199
+      fireArrowZone_34: 6317818017929153637
+      fireArrowZone_35: 6886285520496914694
+      fireArrowZone_36: 4296726012304833707
+      fireArrowZone_37: 8060580196248836870
+      fireArrowZone_38: -8069660314984959350
+      fireArrowZone_39: -3180548741233012521
+      fireArrowZone_4: 5714002944851957247
+      fireArrowZone_40: -8390297731890855792
+      fireArrowZone_41: -3990899208772573447
+      fireArrowZone_42: -8850806562602285873
+      fireArrowZone_43: 2253960844003199192
+      fireArrowZone_44: 5935269062478184704
+      fireArrowZone_45: -5507933517375053326
+      fireArrowZone_46: 7151735158294685604
+      fireArrowZone_47: 6578470466779646098
+      fireArrowZone_48: 1540493746532128224
+      fireArrowZone_49: 7306680851561752594
+      fireArrowZone_5: -6686535344392233498
+      fireArrowZone_50: 7922998987412886195
+      fireArrowZone_51: -7152240769051758602
+      fireArrowZone_52: -7964562979473633804
+      fireArrowZone_53: 281889254687328561
+      fireArrowZone_54: -8837033250944295980
+      fireArrowZone_55: 6749657195745758024
+      fireArrowZone_56: -7837189992530436137
+      fireArrowZone_57: -5231705738699713417
+      fireArrowZone_58: 7188142667177268999
+      fireArrowZone_59: 6270576847620509517
+      fireArrowZone_6: 961750515741000408
+      fireArrowZone_60: -4875030871932755659
+      fireArrowZone_61: 1362805128842869342
+      fireArrowZone_62: -909277107746741124
+      fireArrowZone_63: -7433993533122667943
+      fireArrowZone_7: 5362435712308888557
+      fireArrowZone_8: -1562166065007186108
+      fireArrowZone_9: -2809583001407135049
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

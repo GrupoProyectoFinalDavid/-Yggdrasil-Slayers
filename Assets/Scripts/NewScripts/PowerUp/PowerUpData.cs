@@ -24,6 +24,7 @@ public class PowerUpData : ScriptableObject
     public float[] lifeBoostPerLevel;
     public int[] projectileCountPerLevel;
     public float[] cooldownPerLevel;
+    public float[] tickRatePerLevel;
     public float[] durationPerLevel;
     public float[] radiusPerLevel;
     public int maxLevel = 4;

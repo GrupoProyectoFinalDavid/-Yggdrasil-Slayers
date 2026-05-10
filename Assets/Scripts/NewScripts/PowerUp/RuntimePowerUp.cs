@@ -156,4 +156,31 @@ public class RuntimePowerUp
 
         return data.projectileCountPerLevel[level - 1];
     }
+
+    public float GetDuration()
+    {
+        if (data.durationPerLevel == null ||
+            data.durationPerLevel.Length == 0)
+            return 1f;
+
+        return data.durationPerLevel[level - 1];
+    }
+
+    public float GetRadius()
+    {
+        if (data.radiusPerLevel == null ||
+            data.radiusPerLevel.Length == 0)
+            return 1f;
+
+        return data.radiusPerLevel[level - 1];
+    }
+
+    public float GetTickRate()
+    {
+        if (data.tickRatePerLevel == null ||
+            data.tickRatePerLevel.Length == 0)
+            return 1f;
+
+        return data.tickRatePerLevel[level - 1];
+    }
 }

@@ -10,26 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ef8e3ff81061bc4bab709c3d9baaf99, type: 3}
-  m_Name: Martillo
+  m_Name: Cuerno
   m_EditorClassIdentifier: 
-  powerUpName: Martillo
+  powerUpName: Cuerno
   isPassive: 0
   passiveType: 0
   damagePerLevel:
   - 10
   - 10
   - 15
-  - 20
+  - 15
   lifeBoostPerLevel: []
   projectileCountPerLevel: 
-  cooldownPerLevel:
-  - 4
-  - 3
-  - 3
+  cooldownPerLevel: []
+  tickRatePerLevel:
+  - 0.5
+  durationPerLevel:
   - 2
-  durationPerLevel: []
+  - 3
+  - 3
+  - 4
   radiusPerLevel:
   - 1.25
+  - 1.5
+  - 1.75
+  - 2
   maxLevel: 4
   abilities:
-  - {fileID: 11400000, guid: 0c014b4c0058f4640b687292ed1440a8, type: 2}
+  - {fileID: 11400000, guid: de886b2cb8d5b924c8d0d94ca2697e93, type: 2}

@@ -9,17 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e063763dd6afb7047b94d7d81a1ae5ba, type: 3}
-  m_Name: LightningArea
+  m_Script: {fileID: 11500000, guid: 4e08dca6b6b706847b96e0c5c31c7c81, type: 3}
+  m_Name: FireArrowRainAbility
   m_EditorClassIdentifier: 
-  detectionRadius: 6
+  detectionRadius: 8
   enemyLayer:
     serializedVersion: 2
     m_Bits: 1024
-  warningDuration: 1
-  impactRadius: 1.25
-  damage: 0
-  warningPrefab: {fileID: 5138630064410599621, guid: 8b82b361d3e58a24da512be9e46cb68a,
-    type: 3}
-  impactPrefab: {fileID: 4971171908792903305, guid: 3f734db74b58f304086dcfdf01556b73,
+  areaPrefab: {fileID: 328471695368200327, guid: 7893278d01ca18447bb9d93d4b8b2d2a,
     type: 3}
