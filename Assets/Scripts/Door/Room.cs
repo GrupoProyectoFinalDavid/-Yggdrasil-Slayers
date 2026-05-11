@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Room : MonoBehaviour
 {
+    [Header("Generación")]
+    public Vector2Int gridPosition;
+    public bool isGeneratedRoom = false;
 
     [Header("Configuración")]
     public string roomName = "Sala";
@@ -51,6 +54,30 @@ public class Room : MonoBehaviour
     {
         _playerInside = false;
         Debug.Log($"[Room] Jugador salió de '{roomName}'");
+    }
+    
+    public Door GetDoor(DoorDirection direction)
+    {
+        if (doors == null) return null;
+
+        foreach (Door door in doors)
+        {
+            if (door != null && door.direction == direction)
+                return door;
+        }
+
+        return null;
+    }
+    
+    public void AssignOwnerToDoors()
+    {
+        if (doors == null) return;
+
+        foreach (Door door in doors)
+        {
+            if (door != null)
+                door.ownerRoom = this;
+        }
     }
 
 

@@ -3,6 +3,10 @@ using System.Collections;
 
 public class Door : MonoBehaviour
 {
+    
+    [Header("Dirección de la puerta")]
+    public DoorDirection direction;
+    
     [Header("Conexión entre salas")]
     public Door connectedDoor;           // La puerta destino en la otra sala
     public Room ownerRoom;               // La sala a la que pertenece esta puerta
@@ -44,13 +48,73 @@ public class Door : MonoBehaviour
         if (_isOnCooldown)               return;
         if (IsLocked)                    return;  // bloqueada: no deja pasar
         if (!other.CompareTag("Player")) return;
-        if (connectedDoor == null)       return;
+        if (connectedDoor == null)
+        {
+            DungeonGenerator generator = FindFirstObjectByType<DungeonGenerator>();
+
+            if (generator != null)
+            {
+                Room newRoom = generator.SpawnRoom(TargetGridPosition);
+
+                if (newRoom != null)
+                {
+                    DoorDirection oppositeDirection = GetOppositeDirection(direction);
+                    connectedDoor = newRoom.GetDoor(oppositeDirection);
+
+                    if (connectedDoor != null)
+                    {
+                        connectedDoor.connectedDoor = this;
+                    }
+                }
+            }
+        }
+
+        if (connectedDoor == null) return;
 
         Debug.Log($"[Door] SpawnPoint de destino: {connectedDoor.spawnPoint.position}");
         Debug.Log($"[Door] ConnectedDoor: {connectedDoor.name}");
 
         RoomManager.Instance.TransitionThroughDoor(
             other.GetComponent<Player>(), this, connectedDoor);
+    }
+    
+    public Vector2Int TargetGridPosition
+    {
+        get
+        {
+            if (ownerRoom == null) return Vector2Int.zero;
+
+            switch (direction)
+            {
+                case DoorDirection.Up:
+                    return ownerRoom.gridPosition + Vector2Int.up;
+                case DoorDirection.Down:
+                    return ownerRoom.gridPosition + Vector2Int.down;
+                case DoorDirection.Left:
+                    return ownerRoom.gridPosition + Vector2Int.left;
+                case DoorDirection.Right:
+                    return ownerRoom.gridPosition + Vector2Int.right;
+                default:
+                    return ownerRoom.gridPosition;
+            }
+        }
+    }
+    
+    private DoorDirection GetOppositeDirection(DoorDirection dir)
+    {
+        switch (dir)
+        {
+            case DoorDirection.Up:
+                return DoorDirection.Down;
+            case DoorDirection.Down:
+                return DoorDirection.Up;
+            case DoorDirection.Left:
+                return DoorDirection.Right;
+            case DoorDirection.Right:
+                return DoorDirection.Left;
+            default:
+                return DoorDirection.Down;
+        }
     }
 
     // ────────────────────────────────────────────────────────
