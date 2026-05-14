@@ -1,28 +1,22 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("Player")]
-    public Transform player;
+    public static GameManager Instance { get; private set; }
 
-    [Header("Salas del nivel")]
-    public Room[] rooms;
-    
-    public bool  GameStarted       { get; private set; }
-    public float TotalGameTime     { get; private set; }
-    public bool  AllRoomsCleared   { get; private set; }
+    public Transform Player          { get; private set; }
+    public bool  GameStarted         { get; private set; }
+    public float TotalGameTime       { get; private set; }
+    public bool  AllRoomsCleared     { get; private set; }
 
     private int _roomsCleared = 0;
-    
-    private void Start()
-    {
-        GameStarted = true;  // ← arranca al cargar la escena
+    private readonly List<Room> _registeredRooms = new List<Room>();
 
-        foreach (Room room in rooms)
-        {
-            if (room != null && room.roomEvent != null)
-                room.roomEvent.OnEventCompleted += OnRoomCleared;
-        }
+    private void Awake()
+    {
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+        Instance = this;
     }
 
     private void Update()
@@ -31,49 +25,56 @@ public class GameManager : MonoBehaviour
             TotalGameTime += Time.deltaTime;
     }
 
+    // ── API pública ──────────────────────────────────────────────────────────
 
-    private void OnRoomCleared()
+    public void RegisterPlayer(Transform playerTransform)
     {
-        if (!GameStarted) GameStarted = true;
+        Player = playerTransform;
+        GameStarted = true;
+        Debug.Log("[GameManager] Jugador registrado: " + playerTransform.name);
+    }
 
+    public void RegisterRoom(Room room)
+    {
+        if (room == null || _registeredRooms.Contains(room)) return;
+        if (room.possibleEvents == null || room.possibleEvents.Length == 0) return;
+
+        _registeredRooms.Add(room);
+        Debug.Log($"[GameManager] Sala registrada: '{room.roomName}' (total: {_registeredRooms.Count})");
+    }
+
+    public WaveEvent GetActiveWaveEvent()
+    {
+        foreach (Room room in _registeredRooms)
+        {
+            if (room == null) continue;
+            WaveEvent we = room.ActiveEvent as WaveEvent;
+            if (we != null && we.IsRunning) return we;
+        }
+        return null;
+    }
+
+    public SurvivalEvent GetActiveSurvivalEvent()
+    {
+        foreach (Room room in _registeredRooms)
+        {
+            if (room == null) continue;
+            SurvivalEvent se = room.ActiveEvent as SurvivalEvent;
+            if (se != null && se.IsRunning) return se;
+        }
+        return null;
+    }
+    // Llamado desde Room.OnRoomCleared → necesita ser público
+    public void NotifyRoomCleared()
+    {
         _roomsCleared++;
-        Debug.Log($"[GameManager] Salas limpias: {_roomsCleared} / {rooms.Length}");
+        Debug.Log($"[GameManager] Salas limpias: {_roomsCleared} / {_registeredRooms.Count}");
 
-        if (_roomsCleared >= CountRoomsWithEvents())
+        if (_roomsCleared >= _registeredRooms.Count)
         {
             AllRoomsCleared = true;
             Debug.Log("[GameManager] ¡Todas las salas completadas!");
         }
     }
-    
-    private int CountRoomsWithEvents()
-    {
-        int count = 0;
-        foreach (Room room in rooms)
-            if (room != null && room.roomEvent != null)
-                count++;
-        return count;
-    }
-    
-    public WaveEvent GetActiveWaveEvent()
-    {
-        foreach (Room room in rooms)
-        {
-            if (room == null) continue;
-            WaveEvent we = room.roomEvent as WaveEvent;
-            if (we != null && we.IsRunning) return we;
-        }
-        return null;
-    }
-    
-    public SurvivalEvent GetActiveSurvivalEvent()
-    {
-        foreach (Room room in rooms)
-        {
-            if (room == null) continue;
-            SurvivalEvent se = room.roomEvent as SurvivalEvent;
-            if (se != null && se.IsRunning) return se;
-        }
-        return null;
-    }
+
 }

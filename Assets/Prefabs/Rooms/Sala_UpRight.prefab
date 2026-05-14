@@ -768,6 +768,7 @@ GameObject:
   - component: {fileID: 3976771078982692645}
   - component: {fileID: 8159548066363515009}
   - component: {fileID: 213546935791934194}
+  - component: {fileID: -7958408035466078886}
   m_Layer: 0
   m_Name: Sala_UpRight
   m_TagString: Untagged
@@ -865,10 +866,13 @@ MonoBehaviour:
   isGeneratedRoom: 1
   roomName: Sala_UpRight
   cameraBounds: {fileID: 3988671815077561861}
+  playerTag: Player
   doors:
   - {fileID: 8678637768135753757}
   - {fileID: 1103200769318539907}
-  roomEvent: {fileID: 8159548066363515009}
+  possibleEvents:
+  - {fileID: 8159548066363515009}
+  - {fileID: -7958408035466078886}
 --- !u!114 &8159548066363515009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -884,9 +888,33 @@ MonoBehaviour:
   eventName: Evento
   waves:
   - enemyPrefabs:
-    - {fileID: 323397573781496505, guid: 5de699bcdde002a418136ded39baf9de, type: 3}
-    - {fileID: 323397573781496505, guid: 5de699bcdde002a418136ded39baf9de, type: 3}
-    - {fileID: 323397573781496505, guid: 5de699bcdde002a418136ded39baf9de, type: 3}
+    - {fileID: 3913448981184429777, guid: 03c2fd3fb82509845b9f60f52926bb93, type: 3}
+    - {fileID: 3913448981184429777, guid: 03c2fd3fb82509845b9f60f52926bb93, type: 3}
+    - {fileID: 3913448981184429777, guid: 03c2fd3fb82509845b9f60f52926bb93, type: 3}
+    - {fileID: 3913448981184429777, guid: 03c2fd3fb82509845b9f60f52926bb93, type: 3}
+    - {fileID: 3913448981184429777, guid: 03c2fd3fb82509845b9f60f52926bb93, type: 3}
+    - {fileID: 3913448981184429777, guid: 03c2fd3fb82509845b9f60f52926bb93, type: 3}
+    - {fileID: 3913448981184429777, guid: 03c2fd3fb82509845b9f60f52926bb93, type: 3}
+    - {fileID: 3913448981184429777, guid: 03c2fd3fb82509845b9f60f52926bb93, type: 3}
+    - {fileID: 3913448981184429777, guid: 03c2fd3fb82509845b9f60f52926bb93, type: 3}
+    - {fileID: 3913448981184429777, guid: 03c2fd3fb82509845b9f60f52926bb93, type: 3}
+    - {fileID: 323397573781496505, guid: 4d5dc8ad0fcd1954599b67f2ea9098c0, type: 3}
+    - {fileID: 323397573781496505, guid: 4d5dc8ad0fcd1954599b67f2ea9098c0, type: 3}
+    - {fileID: 323397573781496505, guid: 4d5dc8ad0fcd1954599b67f2ea9098c0, type: 3}
+    - {fileID: 323397573781496505, guid: 4d5dc8ad0fcd1954599b67f2ea9098c0, type: 3}
+    - {fileID: 323397573781496505, guid: 4d5dc8ad0fcd1954599b67f2ea9098c0, type: 3}
+    delayBeforeNextWave: 0
+  - enemyPrefabs:
+    - {fileID: 3913448981184429777, guid: 03c2fd3fb82509845b9f60f52926bb93, type: 3}
+    - {fileID: 3913448981184429777, guid: 03c2fd3fb82509845b9f60f52926bb93, type: 3}
+    - {fileID: 3913448981184429777, guid: 03c2fd3fb82509845b9f60f52926bb93, type: 3}
+    - {fileID: 3913448981184429777, guid: 03c2fd3fb82509845b9f60f52926bb93, type: 3}
+    - {fileID: 3913448981184429777, guid: 03c2fd3fb82509845b9f60f52926bb93, type: 3}
+    - {fileID: 3913448981184429777, guid: 03c2fd3fb82509845b9f60f52926bb93, type: 3}
+    - {fileID: 3913448981184429777, guid: 03c2fd3fb82509845b9f60f52926bb93, type: 3}
+    - {fileID: 3913448981184429777, guid: 03c2fd3fb82509845b9f60f52926bb93, type: 3}
+    - {fileID: 3913448981184429777, guid: 03c2fd3fb82509845b9f60f52926bb93, type: 3}
+    - {fileID: 3913448981184429777, guid: 03c2fd3fb82509845b9f60f52926bb93, type: 3}
     - {fileID: 323397573781496505, guid: 5de699bcdde002a418136ded39baf9de, type: 3}
     - {fileID: 323397573781496505, guid: 5de699bcdde002a418136ded39baf9de, type: 3}
     - {fileID: 323397573781496505, guid: 5de699bcdde002a418136ded39baf9de, type: 3}
@@ -895,20 +923,13 @@ MonoBehaviour:
     delayBeforeNextWave: 0
   - enemyPrefabs:
     - {fileID: 323397573781496505, guid: 5de699bcdde002a418136ded39baf9de, type: 3}
-    - {fileID: 5001471821994202363, guid: ab3a390d8c3e7e6429cba2e75888616f, type: 3}
-    - {fileID: 5001471821994202363, guid: ab3a390d8c3e7e6429cba2e75888616f, type: 3}
-    - {fileID: 5001471821994202363, guid: ab3a390d8c3e7e6429cba2e75888616f, type: 3}
-    - {fileID: 5001471821994202363, guid: ab3a390d8c3e7e6429cba2e75888616f, type: 3}
-    - {fileID: 5001471821994202363, guid: ab3a390d8c3e7e6429cba2e75888616f, type: 3}
-    - {fileID: 5001471821994202363, guid: ab3a390d8c3e7e6429cba2e75888616f, type: 3}
-    delayBeforeNextWave: 0
-  - enemyPrefabs:
-    - {fileID: 7603247452742976850, guid: 1c0063fcf151e10469bf922e6b1bfd1b, type: 3}
-    - {fileID: 7603247452742976850, guid: 1c0063fcf151e10469bf922e6b1bfd1b, type: 3}
-    - {fileID: 7603247452742976850, guid: 1c0063fcf151e10469bf922e6b1bfd1b, type: 3}
-    - {fileID: 7603247452742976850, guid: 1c0063fcf151e10469bf922e6b1bfd1b, type: 3}
-    - {fileID: 7603247452742976850, guid: 1c0063fcf151e10469bf922e6b1bfd1b, type: 3}
-    - {fileID: 7603247452742976850, guid: 1c0063fcf151e10469bf922e6b1bfd1b, type: 3}
+    - {fileID: 323397573781496505, guid: 5de699bcdde002a418136ded39baf9de, type: 3}
+    - {fileID: 323397573781496505, guid: 5de699bcdde002a418136ded39baf9de, type: 3}
+    - {fileID: 323397573781496505, guid: 5de699bcdde002a418136ded39baf9de, type: 3}
+    - {fileID: 323397573781496505, guid: 5de699bcdde002a418136ded39baf9de, type: 3}
+    - {fileID: 323397573781496505, guid: a64c086d529b17d40a73976a55492aea, type: 3}
+    - {fileID: 323397573781496505, guid: a64c086d529b17d40a73976a55492aea, type: 3}
+    - {fileID: 323397573781496505, guid: a64c086d529b17d40a73976a55492aea, type: 3}
     delayBeforeNextWave: 0
   player: {fileID: 0}
   spawnAreaSize: {x: 20, y: 20}
@@ -927,10 +948,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomType: 1
+  rowType: 0
   hasUp: 1
   hasDown: 0
   hasLeft: 0
   hasRight: 1
+--- !u!114 &-7958408035466078886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6583429324184802273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2009a39c66dd3b549927545b2a39da55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventName: Evento
+  survivalDuration: 30
+  enemyPrefabs:
+  - {fileID: 323397573781496505, guid: 5de699bcdde002a418136ded39baf9de, type: 3}
+  - {fileID: 5001471821994202363, guid: ab3a390d8c3e7e6429cba2e75888616f, type: 3}
+  - {fileID: 323397573781496505, guid: 4d5dc8ad0fcd1954599b67f2ea9098c0, type: 3}
+  - {fileID: 3913448981184429777, guid: 03c2fd3fb82509845b9f60f52926bb93, type: 3}
+  - {fileID: 7603247452742976850, guid: 1c0063fcf151e10469bf922e6b1bfd1b, type: 3}
+  player: {fileID: 0}
+  spawnAreaSize: {x: 20, y: 20}
+  minDistanceFromPlayer: 5
+  maxSpawnAttempts: 30
+  spawnInterval: 1
+  maxEnemiesAlive: 10
 --- !u!1 &7425408076486338998
 GameObject:
   m_ObjectHideFlags: 0

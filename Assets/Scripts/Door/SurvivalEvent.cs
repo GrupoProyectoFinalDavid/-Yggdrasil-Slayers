@@ -28,6 +28,13 @@ public class SurvivalEvent : RoomEvent
     
     protected override void OnEventStart()
     {
+        // Coge el player de GameManager si no está asignado
+        if (player == null && GameManager.Instance != null)
+            player = GameManager.Instance.Player;
+
+        if (player == null)
+            Debug.LogError("[SurvivalEvent] No hay referencia al player.");
+
         TimeRemaining = survivalDuration;
         EnemiesAlive  = 0;
         StartCoroutine(SurvivalTimer());

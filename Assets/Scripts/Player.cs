@@ -26,6 +26,11 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
+        // Lee la vida desde PlayerStats en lugar del campo maxHealth
+        PlayerStats stats = GetComponent<PlayerStats>();
+        if (stats != null)
+            maxHealth = Mathf.RoundToInt(stats.life);
+
         currentHealth = maxHealth;
 
         if (healthBar != null)
@@ -39,6 +44,15 @@ public class Player : MonoBehaviour
         float moveY = Input.GetAxisRaw("Vertical");
 
         movement = new Vector2(moveX, moveY).normalized;
+
+        if (animator != null)
+            animator.SetFloat("speed", movement.sqrMagnitude);
+
+        // Flip del sprite según dirección horizontal
+        if (moveX < 0)
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        else if (moveX > 0)
+            transform.localScale = new Vector3(-1f, 1f, 1f);
 
         if (animator != null)
             animator.SetFloat("speed", movement.sqrMagnitude);
@@ -66,11 +80,12 @@ public class Player : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("El jugador ha muerto");
+        if (UIManagerGame.Instance != null)
+            UIManagerGame.Instance.ShowDeathPanel();
+
         gameObject.SetActive(false);
     }
 
-    // Método para añadir power-ups
     public void AddPowerUp(PowerUpData data)
     {
         powerUpManager.AddPowerUp(data);

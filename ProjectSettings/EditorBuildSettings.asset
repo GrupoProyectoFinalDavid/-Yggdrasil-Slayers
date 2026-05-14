@@ -9,19 +9,13 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenuUI.unity
     guid: fefde2f2ed4be6f4aa6b668d6ece7caf
   - enabled: 1
-    path: Assets/Scenes/Game.unity
-    guid: 27596e6f32e56874cb4b6df6502de5e7
-  - enabled: 1
     path: Assets/Scenes/Personajes.unity
     guid: 3caa9146c9cead84e80dac6593740e9a
-  - enabled: 1
-    path: Assets/Scenes/PruebasPowerUp.unity
-    guid: c280440bb51b25e4b9bb06d3e2b85402
   - enabled: 1
     path: Assets/Scenes/Resultados.unity
     guid: 625d16dd286b570498130d2d3a2ebe41
   - enabled: 1
-    path: Assets/Scenes/PruebasMoveYPowerUp.unity
+    path: Assets/Scenes/Juego.unity
     guid: fe5c739204504f348a854cde67adfaf9
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

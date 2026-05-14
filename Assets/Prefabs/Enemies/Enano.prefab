@@ -114,8 +114,8 @@ MonoBehaviour:
   maxHealth: 3
   damage: 10
   attackCooldown: 1
-  wobbleSpeed: 8
-  wobbleAmount: 12
+  wobbleSpeed: 6
+  wobbleAmount: 8
   wobbleWhileIdle: 0
 --- !u!61 &1017472886369209512
 BoxCollider2D:
@@ -151,7 +151,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.0046634674, y: 0.3601029}
+  m_Offset: {x: -0.0046634674, y: 0.0005906224}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -161,5 +161,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.1999931, y: 0.7202058}
+  m_Size: {x: 1.1999931, y: 1.4392303}
   m_EdgeRadius: 0

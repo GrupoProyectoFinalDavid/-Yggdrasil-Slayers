@@ -248,6 +248,7 @@ GameObject:
   - component: {fileID: 5244460001818398788}
   - component: {fileID: 5096869621128762784}
   - component: {fileID: 691568308212085681}
+  - component: {fileID: -6627623108625763414}
   m_Layer: 0
   m_Name: Sala_Boss
   m_TagString: Untagged
@@ -344,9 +345,12 @@ MonoBehaviour:
   isGeneratedRoom: 1
   roomName: Sala_Boss
   cameraBounds: {fileID: 325763388413341070}
+  playerTag: Player
   doors:
   - {fileID: 1064770996289289521}
-  roomEvent: {fileID: 5096869621128762784}
+  possibleEvents:
+  - {fileID: 5096869621128762784}
+  - {fileID: -6627623108625763414}
 --- !u!114 &5096869621128762784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405,10 +409,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomType: 2
+  rowType: 0
   hasUp: 0
   hasDown: 1
   hasLeft: 0
   hasRight: 0
+--- !u!114 &-6627623108625763414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2824512245046757693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2009a39c66dd3b549927545b2a39da55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventName: Evento
+  survivalDuration: 30
+  enemyPrefabs:
+  - {fileID: 323397573781496505, guid: 5de699bcdde002a418136ded39baf9de, type: 3}
+  - {fileID: 5001471821994202363, guid: ab3a390d8c3e7e6429cba2e75888616f, type: 3}
+  - {fileID: 323397573781496505, guid: 4d5dc8ad0fcd1954599b67f2ea9098c0, type: 3}
+  - {fileID: 3913448981184429777, guid: 03c2fd3fb82509845b9f60f52926bb93, type: 3}
+  - {fileID: 7603247452742976850, guid: 1c0063fcf151e10469bf922e6b1bfd1b, type: 3}
+  player: {fileID: 0}
+  spawnAreaSize: {x: 20, y: 20}
+  minDistanceFromPlayer: 5
+  maxSpawnAttempts: 30
+  spawnInterval: 4
+  maxEnemiesAlive: 10
 --- !u!1 &2898067502096096113
 GameObject:
   m_ObjectHideFlags: 0

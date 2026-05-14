@@ -6,12 +6,15 @@ public class DungeonGenerator : MonoBehaviour
     [Header("Tamaño de la mazmorra")]
     public int width = 3;
     public int height = 4;
-
+    
     [Header("Separación entre salas")]
     public Vector2 roomSpacing = new Vector2(45.5f, 0f);
 
     [Header("Sala inicial ya colocada en la escena")]
     public Room startRoomInScene;
+
+    [Header("Tipo de sala por fila (índice = fila Y de la matriz)")]
+    public RowType[] rowTypes; // Asigna en Inspector: rowTypes[0]=Row0, rowTypes[1]=Row1...
 
     [Header("Prefabs de salas")]
     public RoomPrefabInfo bossRoomPrefab;
@@ -42,6 +45,9 @@ public class DungeonGenerator : MonoBehaviour
 
         for (int y = 0; y < height; y++)
         {
+            // Determina el RowType de esta fila, con fallback a Row0 si el array es corto
+            RowType rowType = (rowTypes != null && y < rowTypes.Length) ? rowTypes[y] : RowType.Row0;
+
             for (int x = 0; x < width; x++)
             {
                 Vector2Int pos = new Vector2Int(x, y);
@@ -49,23 +55,21 @@ public class DungeonGenerator : MonoBehaviour
                 RoomLayoutData data = new RoomLayoutData();
 
                 data.roomType = RoomType.Normal;
+                data.rowType = rowType; // <-- asignamos el tipo de fila
 
-                data.hasUp = y < height - 1;
-                data.hasDown = y > 0;
-                data.hasLeft = x > 0;
+                data.hasUp    = y < height - 1;
+                data.hasDown  = y > 0;
+                data.hasLeft  = x > 0;
                 data.hasRight = x < width - 1;
 
-                // La sala inicial está fija en la escena.
-                // Tiene 4 puertas visuales, pero hacia abajo no genera sala.
                 if (pos == startPosition)
                 {
-                    data.hasUp = true;
-                    data.hasDown = false;
-                    data.hasLeft = true;
+                    data.hasUp    = true;
+                    data.hasDown  = false;
+                    data.hasLeft  = true;
                     data.hasRight = true;
                 }
 
-                // La sala de la cuarta fila que conecta con el jefe necesita puerta arriba.
                 if (pos == bossBasePosition)
                 {
                     data.hasUp = true;
@@ -75,13 +79,13 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
 
-        // Sala del jefe encima de una de las salas superiores
         layout[bossPosition] = new RoomLayoutData
         {
             roomType = RoomType.Boss,
-            hasUp = false,
-            hasDown = true,
-            hasLeft = false,
+            rowType  = RowType.Row0, // la sala boss no usa rowType, pero necesita un valor
+            hasUp    = false,
+            hasDown  = true,
+            hasLeft  = false,
             hasRight = false
         };
     }
@@ -101,9 +105,7 @@ public class DungeonGenerator : MonoBehaviour
         spawnedRooms[startPosition] = startRoomInScene;
 
         if (roomManager != null)
-        {
             roomManager.startingRoom = startRoomInScene;
-        }
 
         Debug.Log("[DungeonGenerator] Sala inicial registrada en " + startPosition);
     }
@@ -120,26 +122,23 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         RoomLayoutData data = layout[position];
-
         RoomPrefabInfo selectedPrefab = GetPrefabFor(data);
 
         if (selectedPrefab == null)
         {
             Debug.LogError(
                 "[DungeonGenerator] No hay prefab compatible para " + position +
-                " | Up=" + data.hasUp +
+                " | RowType=" + data.rowType +
+                " Up=" + data.hasUp +
                 " Down=" + data.hasDown +
                 " Left=" + data.hasLeft +
                 " Right=" + data.hasRight
             );
-
             return null;
         }
 
         Vector3 worldPosition = GridToWorld(position);
-
         RoomPrefabInfo instance = Instantiate(selectedPrefab, worldPosition, Quaternion.identity);
-
         Room room = instance.GetComponent<Room>();
 
         if (room == null)
@@ -154,12 +153,10 @@ public class DungeonGenerator : MonoBehaviour
         room.AssignOwnerToDoors();
 
         DisableUnusedDoors(room, data);
-
         spawnedRooms[position] = room;
-
         ConnectWithNeighbours(position, room);
 
-        Debug.Log("[DungeonGenerator] Sala generada en " + position + ": " + room.name);
+        Debug.Log("[DungeonGenerator] Sala generada en " + position + " [" + data.rowType + "]: " + room.name);
 
         return room;
     }
@@ -167,9 +164,7 @@ public class DungeonGenerator : MonoBehaviour
     private RoomPrefabInfo GetPrefabFor(RoomLayoutData data)
     {
         if (data.roomType == RoomType.Boss)
-        {
             return bossRoomPrefab;
-        }
 
         List<RoomPrefabInfo> validPrefabs = new List<RoomPrefabInfo>();
 
@@ -177,10 +172,12 @@ public class DungeonGenerator : MonoBehaviour
         {
             if (prefab == null) continue;
 
-            if (prefab.Matches(data.hasUp, data.hasDown, data.hasLeft, data.hasRight))
-            {
+            // Filtra por puertas Y por la fila a la que pertenece el prefab
+            bool matchesDoors = prefab.Matches(data.hasUp, data.hasDown, data.hasLeft, data.hasRight);
+            bool matchesRow   = prefab.rowType == data.rowType;
+
+            if (matchesDoors && matchesRow)
                 validPrefabs.Add(prefab);
-            }
         }
 
         if (validPrefabs.Count == 0)
@@ -197,9 +194,9 @@ public class DungeonGenerator : MonoBehaviour
 
             bool shouldBeActive = false;
 
-            if (door.direction == DoorDirection.Up) shouldBeActive = data.hasUp;
-            if (door.direction == DoorDirection.Down) shouldBeActive = data.hasDown;
-            if (door.direction == DoorDirection.Left) shouldBeActive = data.hasLeft;
+            if (door.direction == DoorDirection.Up)    shouldBeActive = data.hasUp;
+            if (door.direction == DoorDirection.Down)  shouldBeActive = data.hasDown;
+            if (door.direction == DoorDirection.Left)  shouldBeActive = data.hasLeft;
             if (door.direction == DoorDirection.Right) shouldBeActive = data.hasRight;
 
             door.gameObject.SetActive(shouldBeActive);
@@ -208,9 +205,9 @@ public class DungeonGenerator : MonoBehaviour
 
     private void ConnectWithNeighbours(Vector2Int position, Room room)
     {
-        TryConnect(position, room, Vector2Int.up, DoorDirection.Up, DoorDirection.Down);
-        TryConnect(position, room, Vector2Int.down, DoorDirection.Down, DoorDirection.Up);
-        TryConnect(position, room, Vector2Int.left, DoorDirection.Left, DoorDirection.Right);
+        TryConnect(position, room, Vector2Int.up,    DoorDirection.Up,    DoorDirection.Down);
+        TryConnect(position, room, Vector2Int.down,  DoorDirection.Down,  DoorDirection.Up);
+        TryConnect(position, room, Vector2Int.left,  DoorDirection.Left,  DoorDirection.Right);
         TryConnect(position, room, Vector2Int.right, DoorDirection.Right, DoorDirection.Left);
     }
 
@@ -228,20 +225,19 @@ public class DungeonGenerator : MonoBehaviour
 
         Room neighbourRoom = spawnedRooms[neighbourPosition];
 
-        Door myDoor = room.GetDoor(myDirection);
+        Door myDoor        = room.GetDoor(myDirection);
         Door neighbourDoor = neighbourRoom.GetDoor(neighbourDirection);
 
         if (myDoor == null || neighbourDoor == null)
             return;
 
-        myDoor.connectedDoor = neighbourDoor;
+        myDoor.connectedDoor        = neighbourDoor;
         neighbourDoor.connectedDoor = myDoor;
     }
 
     private Vector3 GridToWorld(Vector2Int position)
     {
         Vector3 startWorldPosition = startRoomInScene.transform.position;
-
         Vector2Int offset = position - startPosition;
 
         return startWorldPosition + new Vector3(
@@ -254,6 +250,7 @@ public class DungeonGenerator : MonoBehaviour
     private class RoomLayoutData
     {
         public RoomType roomType = RoomType.Normal;
+        public RowType  rowType  = RowType.Row0;   // <-- nuevo
         public bool hasUp;
         public bool hasDown;
         public bool hasLeft;

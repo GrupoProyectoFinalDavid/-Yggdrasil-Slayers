@@ -162,6 +162,9 @@ MonoBehaviour:
   maxHealth: 10
   damage: 10
   attackCooldown: 1
+  wobbleSpeed: 6
+  wobbleAmount: 8
+  wobbleWhileIdle: 0
 --- !u!1 &3736718209746160984
 GameObject:
   m_ObjectHideFlags: 0

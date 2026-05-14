@@ -31,6 +31,13 @@ public class WaveEvent : RoomEvent
     
     protected override void OnEventStart()
     {
+        // Coge el player de GameManager si no está asignado
+        if (player == null && GameManager.Instance != null)
+            player = GameManager.Instance.Player;
+
+        if (player == null)
+            Debug.LogError("[WaveEvent] No hay referencia al player.");
+
         CurrentWaveIndex = 0;
         StartCoroutine(RunWaves());
     }

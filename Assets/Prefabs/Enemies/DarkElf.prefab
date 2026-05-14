@@ -85,7 +85,7 @@ SpriteRenderer:
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.6, y: 0.64}
+  m_Size: {x: 1.5, y: 1.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -130,7 +130,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1.5, y: 1.6}
-    newSize: {x: 0.6, y: 0.64}
+    newSize: {x: 1.5, y: 1.6}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -162,6 +162,9 @@ MonoBehaviour:
   maxHealth: 10
   damage: 10
   attackCooldown: 1
+  wobbleSpeed: 6
+  wobbleAmount: 8
+  wobbleWhileIdle: 0
 --- !u!1 &3736718209746160984
 GameObject:
   m_ObjectHideFlags: 0

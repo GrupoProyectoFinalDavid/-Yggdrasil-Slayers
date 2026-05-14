@@ -5,14 +5,17 @@ using TMPro;
 public class CharacterSelectionManager : MonoBehaviour
 {
     [Header("Personajes disponibles")]
-    public GameObject[] characterPrefabs; // Aquí metes los 5 prefabs de personajes
+    public GameObject[] characterPrefabs;
 
     [Header("Botones de selección")]
-    public Button[] characterButtons; // Los 5 botones de personajes
+    public Button[] characterButtons;
     public Button randomButton;
 
     [Header("Botón jugar")]
     public Button playButton;
+
+    [Header("UI de stats")]
+    public PlayerStatsUI playerStatsUI;
 
     [Header("Colores de botones")]
     public Color normalColor = Color.white;
@@ -20,27 +23,19 @@ public class CharacterSelectionManager : MonoBehaviour
 
     private int selectedCharacterIndex = -1;
     private bool randomSelected = false;
+    private GameObject previewInstance;
 
     private void Start()
     {
-        // Asignar eventos a los 5 botones de personaje
         for (int i = 0; i < characterButtons.Length; i++)
         {
             int index = i;
-
-            characterButtons[i].onClick.AddListener(() =>
-            {
-                SelectCharacter(index);
-            });
+            characterButtons[i].onClick.AddListener(() => SelectCharacter(index));
         }
 
-        // Botón aleatorio
         randomButton.onClick.AddListener(SelectRandom);
-
-        // Botón jugar
         playButton.onClick.AddListener(Play);
 
-        // Opcional: seleccionar el primer personaje por defecto
         SelectCharacter(0);
     }
 
@@ -50,6 +45,7 @@ public class CharacterSelectionManager : MonoBehaviour
         randomSelected = false;
 
         UpdateButtonVisuals();
+        PreviewCharacterStats(index);
     }
 
     private void SelectRandom()
@@ -58,69 +54,96 @@ public class CharacterSelectionManager : MonoBehaviour
         randomSelected = true;
 
         UpdateButtonVisuals();
+
+        int previewIndex = Random.Range(0, characterPrefabs.Length);
+        PreviewCharacterStats(previewIndex);
+    }
+
+    private void PreviewCharacterStats(int index)
+    {
+        if (playerStatsUI == null) return;
+        if (characterPrefabs == null || index < 0 || index >= characterPrefabs.Length) return;
+
+        if (previewInstance != null)
+            Destroy(previewInstance);
+
+        previewInstance = Instantiate(characterPrefabs[index]);
+        previewInstance.SetActive(false);
+
+        PlayerStats stats = previewInstance.GetComponent<PlayerStats>();
+
+        if (stats != null)
+            playerStatsUI.SetPlayer(stats);
+        else
+            Debug.LogWarning($"El prefab '{characterPrefabs[index].name}' no tiene PlayerStats en el root.");
+    }
+
+    private void Play()
+    {
+        if (GameManagerPersonajes.Instance == null)
+        {
+            Debug.LogError("No hay GameManager en la escena.");
+            return;
+        }
+
+        GameObject selectedPrefab = characterPrefabs[GetFinalIndex()];
+
+        if (previewInstance != null)
+        {
+            Destroy(previewInstance);
+            previewInstance = null;
+        }
+
+        GameManagerPersonajes.Instance.StartGameWithCharacter(selectedPrefab);
+    }
+
+    public GameObject GetSelectedCharacterPrefab()
+    {
+        return characterPrefabs[GetFinalIndex()];
+    }
+
+    private int GetFinalIndex()
+    {
+        if (randomSelected)
+            return Random.Range(0, characterPrefabs.Length);
+
+        return selectedCharacterIndex;
     }
 
     private void UpdateButtonVisuals()
     {
-        for (int i = 0; i < characterButtons.Length; i++)
-        {
-            ColorBlock colors = characterButtons[i].colors;
-            colors.normalColor = normalColor;
-            colors.selectedColor = normalColor;
-            colors.highlightedColor = normalColor;
-            characterButtons[i].colors = colors;
-        }
+        foreach (Button btn in characterButtons)
+            ResetButtonColor(btn);
 
-        ColorBlock randomColors = randomButton.colors;
-        randomColors.normalColor = normalColor;
-        randomColors.selectedColor = normalColor;
-        randomColors.highlightedColor = normalColor;
-        randomButton.colors = randomColors;
+        ResetButtonColor(randomButton);
 
         if (randomSelected)
-        {
             SetButtonSelected(randomButton);
-        }
         else if (selectedCharacterIndex >= 0 && selectedCharacterIndex < characterButtons.Length)
-        {
             SetButtonSelected(characterButtons[selectedCharacterIndex]);
-        }
+    }
+
+    private void ResetButtonColor(Button button)
+    {
+        ColorBlock colors = button.colors;
+        colors.normalColor      = normalColor;
+        colors.selectedColor    = normalColor;
+        colors.highlightedColor = normalColor;
+        button.colors = colors;
     }
 
     private void SetButtonSelected(Button button)
     {
         ColorBlock colors = button.colors;
-        colors.normalColor = selectedColor;
-        colors.selectedColor = selectedColor;
+        colors.normalColor      = selectedColor;
+        colors.selectedColor    = selectedColor;
         colors.highlightedColor = selectedColor;
         button.colors = colors;
     }
 
-    private void Play()
+    private void OnDestroy()
     {
-        int finalCharacterIndex = selectedCharacterIndex;
-
-        if (randomSelected)
-        {
-            finalCharacterIndex = Random.Range(0, characterPrefabs.Length);
-        }
-
-        GameObject selectedPrefab = characterPrefabs[finalCharacterIndex];
-
-        Debug.Log("Personaje elegido: " + selectedPrefab.name);
-
-        // Aquí luego usaremos selectedPrefab para spawnear el jugador.
-    }
-
-    public GameObject GetSelectedCharacterPrefab()
-    {
-        int finalCharacterIndex = selectedCharacterIndex;
-
-        if (randomSelected)
-        {
-            finalCharacterIndex = Random.Range(0, characterPrefabs.Length);
-        }
-
-        return characterPrefabs[finalCharacterIndex];
+        if (previewInstance != null)
+            Destroy(previewInstance);
     }
 }

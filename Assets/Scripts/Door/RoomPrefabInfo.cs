@@ -4,7 +4,7 @@ public class RoomPrefabInfo : MonoBehaviour
 {
     [Header("Tipo de sala")]
     public RoomType roomType = RoomType.Normal;
-
+    public RowType rowType;
     [Header("Puertas disponibles")]
     public bool hasUp;
     public bool hasDown;
