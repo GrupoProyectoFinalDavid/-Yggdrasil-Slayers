@@ -14,17 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUpName: Bow
   isPassive: 0
+  passiveType: 0
   damagePerLevel:
+  - 5
   - 10
-  - 20
-  - 30
-  - 40
+  - 10
+  - 15
+  lifeBoostPerLevel: []
   projectileCountPerLevel: 01000000020000000300000004000000
   cooldownPerLevel:
   - 1.5
   - 1.25
   - 1
   - 0.5
+  tickRatePerLevel: []
   durationPerLevel: []
   radiusPerLevel: []
   maxLevel: 4

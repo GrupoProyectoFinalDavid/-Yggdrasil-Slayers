@@ -1,25 +1,62 @@
 using UnityEngine;
+using System.Collections;
 
 [CreateAssetMenu(menuName = "Abilities/AreaAroundPlayer")]
 public class AreaAroundPlayerAbility : AbilityBehaviour
 {
-    public float radius;
-    public float tickRate;
-    public float duration;
+    public float baseRadius;
+    public float baseTickRate;
+    public float baseDuration;
+    public float baseDamage;
+
+    public float yOffset = 1.5f;
+
     public GameObject areaPrefab;
-    private GameObject currentArea;
+
+    private AreaInstance currentArea;
 
     public override void Execute(GameObject owner, RuntimePowerUp powerUp)
     {
-        if (currentArea != null) return;
+        if (currentArea != null)
+            return;
 
-        GameObject area = Instantiate(areaPrefab, owner.transform.position, Quaternion.identity);
-        currentArea = area;
+        float radius = baseRadius + powerUp.GetRadius();
+        float tickRate = Mathf.Max(0.1f, baseTickRate - powerUp.GetTickRate());
+        float duration = baseDuration + powerUp.GetDuration();
+        float damage = baseDamage + powerUp.GetDamage();
 
-        AreaInstance instance = area.GetComponent<AreaInstance>();
-        instance.Init(duration, tickRate, powerUp.GetDamage(), owner, radius);
+        Vector3 offset = Vector3.up * yOffset;
 
-        // Cuando se destruya, liberar referencia
-        instance.OnDestroyed += () => currentArea = null;
+        GameObject area = Instantiate(
+            areaPrefab,
+            owner.transform.position + offset,
+            Quaternion.identity
+        );
+
+        currentArea = area.GetComponent<AreaInstance>();
+
+        currentArea.Init(
+            duration,
+            tickRate,
+            damage,
+            owner,
+            radius,
+            offset // 👈 IMPORTANTE
+        );
+
+        currentArea.OnDestroyed += () =>
+        {
+            currentArea = null;
+            owner.GetComponent<PowerUpManager>()
+                .StartCoroutine(Unlock(powerUp));
+        };
+
+        area.transform.localScale = Vector3.one * radius;
+    }
+
+    private IEnumerator Unlock(RuntimePowerUp powerUp)
+    {
+        yield return null;
+        powerUp.FinishAbility();
     }
 }

@@ -48,4 +48,16 @@ public class PowerUpManager : MonoBehaviour
     {
         StartCoroutine(coroutine);
     }
+
+    public int GetPlayerLevel()
+    {
+        int totalLevel = 0;
+
+        foreach (var pu in activePowerUps)
+        {
+            totalLevel += pu.GetLevel();
+        }
+
+        return Mathf.Max(1, totalLevel);
+    }
 }

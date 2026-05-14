@@ -20,12 +20,14 @@ MonoBehaviour:
   - 15
   - 20
   - 25
-  projectileCountPerLevel: 01000000030000000500000007000000
+  lifeBoostPerLevel: []
+  projectileCountPerLevel: 01000000020000000300000004000000
   cooldownPerLevel:
+  - 4
+  - 3
   - 2
-  - 1.5
-  - 1
-  - 0.75
+  - 2
+  tickRatePerLevel: []
   durationPerLevel: []
   radiusPerLevel: []
   maxLevel: 4

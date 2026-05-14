@@ -10,35 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ef8e3ff81061bc4bab709c3d9baaf99, type: 3}
-  m_Name: Aura
+  m_Name: Hacha
   m_EditorClassIdentifier: 
-  powerUpName: Ajo
+  powerUpName: 
   isPassive: 0
   passiveType: 0
   damagePerLevel:
-  - 5
-  - 10
   - 15
   - 20
+  - 20
+  - 25
   lifeBoostPerLevel: []
-  projectileCountPerLevel: 
+  projectileCountPerLevel: 01000000010000000200000002000000
   cooldownPerLevel:
-  - 3
-  - 2.5
-  - 2
-  - 1.5
-  tickRatePerLevel:
-  - 0.5
-  durationPerLevel:
-  - 1.5
-  - 1.5
-  - 2
-  - 2
-  radiusPerLevel:
-  - 2
-  - 3
-  - 4
+  - 6
   - 5
+  - 4
+  - 3
+  tickRatePerLevel: []
+  durationPerLevel: []
+  radiusPerLevel: []
   maxLevel: 4
   abilities:
-  - {fileID: 11400000, guid: 340b7d07601f4ac4c859271afda2c29c, type: 2}
+  - {fileID: 11400000, guid: 483d63eff0172dd419095e8aeab41831, type: 2}

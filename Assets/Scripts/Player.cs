@@ -38,9 +38,6 @@ public class Player : MonoBehaviour
         // Animación
         if (animator != null)
             animator.SetFloat("speed", movement.sqrMagnitude);
-
-        // Logs de la vida
-        Debug.Log($"HP: {stats.currentHealth} / {stats.maxHealth}");
     }
 
     void FixedUpdate()

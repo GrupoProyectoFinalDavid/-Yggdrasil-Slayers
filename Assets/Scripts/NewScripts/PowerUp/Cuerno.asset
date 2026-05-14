@@ -16,13 +16,17 @@ MonoBehaviour:
   isPassive: 0
   passiveType: 0
   damagePerLevel:
+  - 5
+  - 5
   - 10
   - 10
-  - 15
-  - 15
   lifeBoostPerLevel: []
-  projectileCountPerLevel: 
-  cooldownPerLevel: []
+  projectileCountPerLevel: 01000000020000000300000004000000
+  cooldownPerLevel:
+  - 5
+  - 4.5
+  - 4
+  - 3.5
   tickRatePerLevel:
   - 0.5
   durationPerLevel:
@@ -32,9 +36,9 @@ MonoBehaviour:
   - 4
   radiusPerLevel:
   - 1.25
-  - 1.5
-  - 1.75
-  - 2
+  - 1.25
+  - 1.25
+  - 1.25
   maxLevel: 4
   abilities:
   - {fileID: 11400000, guid: de886b2cb8d5b924c8d0d94ca2697e93, type: 2}

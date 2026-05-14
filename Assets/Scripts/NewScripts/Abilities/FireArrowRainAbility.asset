@@ -16,5 +16,9 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 1024
+  spawnDistance: 3
+  minDistanceBetweenAreas: 0.5
   areaPrefab: {fileID: 328471695368200327, guid: 7893278d01ca18447bb9d93d4b8b2d2a,
     type: 3}
+  loopSound: {fileID: 8300000, guid: 047026a0ac28d8546a821689e41200ea, type: 3}
+  loopVolume: 0.01

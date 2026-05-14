@@ -23,3 +23,5 @@ MonoBehaviour:
     type: 3}
   impactPrefab: {fileID: 4971171908792903305, guid: 3f734db74b58f304086dcfdf01556b73,
     type: 3}
+  strikeSound: {fileID: 8300000, guid: 8f5f77df8e091cc44aeb34c17ee81dbc, type: 3}
+  strikeVolume: 0.5

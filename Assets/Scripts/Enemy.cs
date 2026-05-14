@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    private PowerUpManager powerUpManager;
+
     [Header("Objetivo")]
     public Transform player;
 
@@ -20,25 +22,28 @@ public class Enemy : MonoBehaviour
     public float attackCooldown = 1f; // tiempo entre golpes mientras toca al jugador
     private float lastAttackTime;
 
-    private void Start()
+    [Header("Damage Popup")]
+    public GameObject damagePopupPrefab;
+    public Vector3 popupOffset = new Vector3(0, 1f, 0);
+
+    public System.Action OnDeath;
+
+    void Start()
     {
         currentHealth = maxHealth;
 
-        // Solo busca si GameManager no asignó ya el player
-        if (player == null)
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+
+        if (playerObj != null)
         {
-            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-            if (playerObj != null)
-                player = playerObj.transform;
-            else
-                Debug.LogWarning("[Enemy] No se encontró ningún objeto con tag 'Player'.");
+            player = playerObj.transform;
+            powerUpManager = playerObj.GetComponent<PowerUpManager>();
         }
-        else
-        {
-            // Animación
-            animator = GetComponent<Animator>();
-            animator.SetFloat("speed", speed);
-        }
+
+        int playerLevel = GetPlayerLevelSafe();
+
+        maxHealth = Mathf.Max(1, Mathf.RoundToInt(maxHealth * (1f + (playerLevel - 1) * 0.25f)));
+        currentHealth = maxHealth;
     }
 
     void Update()
@@ -70,6 +75,8 @@ public class Enemy : MonoBehaviour
     {
         currentHealth -= amount;
 
+        ShowDamagePopup(amount);
+
         if (currentHealth <= 0)
         {
             Die();
@@ -78,6 +85,7 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        OnDeath?.Invoke();
         Destroy(gameObject);
     }
 
@@ -96,5 +104,29 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
+    }
+
+    void ShowDamagePopup(int amount)
+    {
+        if (damagePopupPrefab == null) return;
+
+        Vector3 pos = transform.position + popupOffset;
+
+        GameObject popup = Instantiate(damagePopupPrefab, pos, Quaternion.identity);
+
+        DamagePopup dp = popup.GetComponent<DamagePopup>();
+
+        if (dp != null)
+        {
+            dp.Setup(amount, transform, popupOffset);
+        }
+    }
+
+    int GetPlayerLevelSafe()
+    {
+        if (powerUpManager == null)
+            return 1;
+
+        return powerUpManager.GetPlayerLevel();
     }
 }

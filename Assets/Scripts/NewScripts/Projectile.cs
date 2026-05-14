@@ -6,16 +6,26 @@ public class Projectile : MonoBehaviour
     private float speed;
     private GameObject owner;
     private RuntimePowerUp powerUp;
+    private float lifetime;
+    private float lifeTimer;
     private Vector2 direction;
     public GameObject impactEffectPrefab;
 
-    public void Init(GameObject owner, float damage, float speed, Vector2 direction, RuntimePowerUp powerUp)
-    {
+    public void Init(
+        GameObject owner,
+        float damage,
+        float speed,
+        Vector2 direction,
+        RuntimePowerUp powerUp,
+        float lifetime
+    ){
         this.owner = owner;
         this.damage = damage;
         this.speed = speed;
         this.direction = direction;
         this.powerUp = powerUp;
+        this.lifetime = lifetime;
+        this.lifeTimer = 0f;
 
         // Calcular ángulo hacia el enemigo más cercano
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -29,13 +39,25 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(direction * speed * Time.deltaTime, Space.World);
+        transform.Translate(
+            direction * speed * Time.deltaTime, 
+            Space.World
+        );
+
+        lifeTimer += Time.deltaTime;
+
+        if (lifeTimer >= lifetime)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
-    {
+    {   
+        Debug.Log("Hit: " + other.name);
         if (other.CompareTag("Enemy"))
         {
+            
             PlayerStats stats = owner.GetComponent<PlayerStats>();
 
             float finalDamage = DamageCalculator.Calculate(damage, stats);

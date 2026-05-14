@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [CreateAssetMenu(menuName = "Abilities/FireArrowRain")]
 public class FireArrowRainAbility : AbilityBehaviour
@@ -8,111 +9,126 @@ public class FireArrowRainAbility : AbilityBehaviour
     public float detectionRadius = 8f;
     public LayerMask enemyLayer;
 
+    [Header("Spawn Settings")]
+    public float spawnDistance = 3f;
+
+    [Tooltip("Distancia mínima entre áreas")]
+    public float minDistanceBetweenAreas = 2f;
+
     [Header("Prefabs")]
     public GameObject areaPrefab;
 
+    [Header("Audio")]
+    public AudioClip loopSound;
+    [Range(0f, 1f)] public float loopVolume = 1f;
+
     public override void Execute(GameObject owner, RuntimePowerUp powerUp)
-{
-    // Buscar enemigos cerca del player
-    Collider2D[] hits = Physics2D.OverlapCircleAll(
-        owner.transform.position,
-        detectionRadius,
-        enemyLayer
-    );
-
-    // Si no hay enemigos, no hacer nada
-    if (hits.Length == 0) return;
-
-    // Punto aleatorio EXACTAMENTE a distancia 3
-    Vector3 bestPosition = owner.transform.position;
-    int bestEnemyCount = -1;
-
-    int attempts = 8; // cuantos puntos probar
-
-    for (int i = 0; i < attempts; i++)
     {
-        // Punto aleatorio en circunferencia
-        Vector2 randomOffset =
-            Random.insideUnitCircle.normalized * 3f;
-
-        Vector3 testPosition =
-            owner.transform.position +
-            new Vector3(randomOffset.x, randomOffset.y, 0f);
-
-        // Contar enemigos cerca de ese punto
-        Collider2D[] nearbyEnemies = Physics2D.OverlapCircleAll(
-            testPosition,
-            powerUp.GetRadius(),
+        Collider2D[] hits = Physics2D.OverlapCircleAll(
+            owner.transform.position,
+            detectionRadius,
             enemyLayer
         );
 
-        int enemyCount = nearbyEnemies.Length;
-
-        // Guardar mejor posición
-        if (enemyCount > bestEnemyCount)
+        if (hits.Length == 0)
         {
-            bestEnemyCount = enemyCount;
-            bestPosition = testPosition;
+            powerUp.FinishAbility();
+            return;
         }
-    }
 
-    Vector3 spawnPosition = bestPosition;
+        int areaCount = powerUp.GetProjectileCount();
+        Debug.Log("AREA COUNT: " + areaCount);
 
-    owner.GetComponent<PowerUpManager>()
-        .StartAbilityCoroutine(
-            AreaRoutine(
-                spawnPosition,
-                powerUp
-            )
-        );
-}
+        List<Vector3> usedPositions = new List<Vector3>();
 
-    IEnumerator AreaRoutine(
-        Vector3 position,
-        RuntimePowerUp powerUp
-    )
-    {
-        GameObject area = Instantiate(
-            areaPrefab,
-            position,
-            Quaternion.identity
-        );
-
-        float duration = powerUp.GetDuration();
-        float tickRate = powerUp.GetTickRate();
-        float radius = powerUp.GetRadius();
-
-        float timer = 0f;
-        float tickTimer = 0f;
-
-        while (timer < duration)
+        for (int i = 0; i < areaCount; i++)
         {
-            tickTimer -= Time.deltaTime;
+            Vector3 chosenPosition = Vector3.zero;
+            bool foundValid = false;
 
-            if (tickTimer <= 0f)
+            for (int attempt = 0; attempt < 15; attempt++)
             {
-                tickTimer = tickRate;
+                Vector2 randomOffset =
+                    Random.insideUnitCircle.normalized * spawnDistance;
 
-                Collider2D[] hits = Physics2D.OverlapCircleAll(
-                    position,
-                    radius,
-                    enemyLayer
-                );
+                Vector3 testPosition =
+                    owner.transform.position +
+                    new Vector3(randomOffset.x, randomOffset.y, 0f);
 
-                foreach (var hit in hits)
+                bool tooClose = false;
+
+                foreach (var used in usedPositions)
                 {
-                    if (hit.CompareTag("Enemy"))
+                    if (Vector3.Distance(testPosition, used)
+                        < minDistanceBetweenAreas)
                     {
-                        hit.GetComponent<Enemy>()
-                            .TakeDamage((int)powerUp.GetDamage());
+                        tooClose = true;
+                        break;
                     }
                 }
+
+                if (tooClose)
+                    continue;
+
+                chosenPosition = testPosition;
+                foundValid = true;
+                break;
             }
 
-            timer += Time.deltaTime;
-            yield return null;
+            if (!foundValid)
+            {
+                Vector2 fallback =
+                    Random.insideUnitCircle.normalized * spawnDistance;
+
+                chosenPosition =
+                    owner.transform.position +
+                    new Vector3(fallback.x, fallback.y, 0f);
+            }
+
+            usedPositions.Add(chosenPosition);
         }
 
-        Destroy(area);
+        owner.GetComponent<PowerUpManager>()
+            .StartCoroutine(
+                FireRainRoutine(owner, powerUp, usedPositions)
+            );
+    }
+
+    IEnumerator FireRainRoutine(
+        GameObject owner,
+        RuntimePowerUp powerUp,
+        List<Vector3> positions
+    )
+    {
+        foreach (Vector3 pos in positions)
+        {
+            GameObject area = Instantiate(
+                areaPrefab,
+                pos,
+                Quaternion.identity
+            );
+
+            FireArrowRainArea areaScript =
+                area.GetComponent<FireArrowRainArea>();
+
+            if (areaScript == null)
+            {
+                areaScript =
+                    area.AddComponent<FireArrowRainArea>();
+            }
+
+            areaScript.Init(
+                powerUp,
+                enemyLayer,
+                loopSound,
+                loopVolume
+            );
+        }
+
+        yield return new WaitForSeconds(
+            powerUp.GetDuration()
+        );
+
+        powerUp.FinishAbility();
     }
 }

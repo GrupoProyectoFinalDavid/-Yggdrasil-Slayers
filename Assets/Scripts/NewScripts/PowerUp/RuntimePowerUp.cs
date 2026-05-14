@@ -3,10 +3,11 @@ using UnityEngine;
 public class RuntimePowerUp
 {
     public PowerUpData data;
-    private int level = 0;
+    public int level = 0;
 
     private float timer;
     private GameObject owner;
+    private bool isAbilityRunning;
 
     public RuntimePowerUp(PowerUpData data, GameObject owner)
     {
@@ -24,22 +25,32 @@ public class RuntimePowerUp
     public void Update()
     {
         if (data.isPassive) return;
-
+        
+        if (isAbilityRunning)
+                    return;
+        
         timer -= Time.deltaTime;
 
         if (timer <= 0f)
         {
             Activate();
-            timer = GetCooldown();
         }
     }
 
     private void Activate()
     {
+        isAbilityRunning = true;
+
         foreach (var ability in data.abilities)
         {
             ability.Execute(owner, this);
         }
+    }
+
+    public void FinishAbility()
+    {
+        isAbilityRunning = false;
+        timer = GetCooldown();
     }
 
     public void ApplyPassive(PlayerStats stats)
@@ -136,12 +147,24 @@ public class RuntimePowerUp
 
     public float GetDamage()
     {
-        return data.damagePerLevel[level - 1];
+        int index = Mathf.Clamp(
+            level - 1,
+            0,
+            data.damagePerLevel.Length - 1
+        );
+
+        return data.damagePerLevel[index];
     }
 
     public float GetCooldown()
     {
-        return data.cooldownPerLevel[level - 1];
+        int index = Mathf.Clamp(
+            level - 1,
+            0,
+            data.cooldownPerLevel.Length - 1
+        );
+
+        return data.cooldownPerLevel[index];
     }
 
     public int GetLevel()
@@ -151,10 +174,17 @@ public class RuntimePowerUp
 
     public int GetProjectileCount()
     {
-        if (data.projectileCountPerLevel == null || data.projectileCountPerLevel.Length == 0)
+        if (data.projectileCountPerLevel == null ||
+            data.projectileCountPerLevel.Length == 0)
             return 1;
 
-        return data.projectileCountPerLevel[level - 1];
+        int index = Mathf.Clamp(
+            level - 1,
+            0,
+            data.projectileCountPerLevel.Length - 1
+        );
+
+        return data.projectileCountPerLevel[index];
     }
 
     public float GetDuration()
@@ -163,7 +193,13 @@ public class RuntimePowerUp
             data.durationPerLevel.Length == 0)
             return 1f;
 
-        return data.durationPerLevel[level - 1];
+        int index = Mathf.Clamp(
+            level - 1,
+            0,
+            data.durationPerLevel.Length - 1
+        );
+
+        return data.durationPerLevel[index];
     }
 
     public float GetRadius()
@@ -172,7 +208,13 @@ public class RuntimePowerUp
             data.radiusPerLevel.Length == 0)
             return 1f;
 
-        return data.radiusPerLevel[level - 1];
+        int index = Mathf.Clamp(
+            level - 1,
+            0,
+            data.radiusPerLevel.Length - 1
+        );
+
+        return data.radiusPerLevel[index];
     }
 
     public float GetTickRate()
@@ -181,6 +223,12 @@ public class RuntimePowerUp
             data.tickRatePerLevel.Length == 0)
             return 1f;
 
-        return data.tickRatePerLevel[level - 1];
+        int index = Mathf.Clamp(
+            level - 1,
+            0,
+            data.tickRatePerLevel.Length - 1
+        );
+
+        return data.tickRatePerLevel[index];
     }
 }
